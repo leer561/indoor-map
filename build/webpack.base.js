@@ -1,4 +1,3 @@
-'use strict'
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -17,8 +16,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.vue', '.css', '.json', '.scss'],
 		alias: {
-			vue: 'vue/dist/vue.js',
-			Golo: path.join(__dirname, '../client/custom-vendor/mqtt.js')
+			vue: 'vue/dist/vue.js'
 		}
 	},
 	module: {
@@ -52,8 +50,7 @@ module.exports = {
 	plugins: [
 		new webpack.ProvidePlugin({
 			Vue: 'vue',
-			Vuex: 'Vuex',
-			Golo: 'Golo'
+			Vuex: 'vuex'
 		}),
 		new HtmlWebpackPlugin({
 			title: config.title,

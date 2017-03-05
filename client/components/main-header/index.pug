@@ -1,0 +1,6 @@
+nav#main-header.root-container.navbar.navbar-toggleable-md.navbar-inverse
+    a.navbar-brand(href="#") DEMO
+    .collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+            li.nav-item(v-for="item in nav")
+                router-link.nav-link(:to="item.value") {{item.text}}

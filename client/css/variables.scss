@@ -1,0 +1,118 @@
+// Variables files
+
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+// Utility classes
+@import "node_modules/bootstrap/scss/utilities";
+
+// Colors
+//
+// Grayscale and brand colors for use across Bootstrap.
+
+$gray-dark:                 #373a3c ;
+$gray:                      #55595c ;
+$gray-light:                #818a91 ;
+$gray-lighter:              #eceeef ;
+$gray-lightest:             #f7f7f9 ;
+
+$brand-primary:             #2299ee ;
+$brand-success:             #09b900 ;
+$brand-info:                #5bc0de ;
+$brand-warning:             #f0ad4e ;
+$brand-danger:              #ff7b7b ;
+$brand-inverse:             $gray-dark ;
+
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-flex:               true;
+$enable-rounded:            true ;
+$enable-shadows:            false ;
+$enable-gradients:          false ;
+$enable-transitions:        false ;
+$enable-hover-media-query:  false ;
+$enable-grid-classes:       true ;
+$enable-print-styles:       true ;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:    #fff !default;
+$body-color: $gray-dark !default;
+
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:            $brand-primary ;
+$link-decoration:       none ;
+$link-hover-color:      darken($link-color, 15%) ;
+$link-hover-decoration: underline ;
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-size-root: 16px;
+
+$font-size-base: 1rem ;
+$font-size-lg:   1.25rem ;
+$font-size-sm:   .875rem ;
+$font-size-xs:   .75rem ;
+
+$line-height-base: 1.5 ;
+
+$font-size-h1: 2.5rem ;
+$font-size-h2: 2rem ;
+$font-size-h3: 1.75rem ;
+$font-size-h4: 1.5rem ;
+$font-size-h5: 1.25rem ;
+$font-size-h6: 1rem ;
+
+
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+) !default;
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px
+) !default;
+@include _assert-ascending($container-max-widths, "$container-max-widths");

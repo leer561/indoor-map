@@ -1,4 +1,3 @@
-'use strict'
 const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -88,8 +87,7 @@ base.module.rules.push(
 						}
 					],
 				}),
-				js: 'babel-loader',
-				pug:'pug-loader'
+				js: 'babel-loader'
 			}
 		}
 	},

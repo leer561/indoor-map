@@ -1,4 +1,3 @@
-'use strict'
 const webpack = require('webpack')
 const base = require('./webpack.base')
 const config = require('./config')
@@ -9,7 +8,7 @@ base.plugins.push(
 		'process.env.NODE_ENV': JSON.stringify('development')
 	}),
 	new webpack.HotModuleReplacementPlugin(),
-	new webpack.NoErrorsPlugin()
+	new webpack.NoEmitOnErrorsPlugin()
 )
 
 //push loaders
