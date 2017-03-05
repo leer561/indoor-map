@@ -1,0 +1,22 @@
+@import "../../css/variables";
+
+#main-header {
+    background    : $brand-primary;
+    color         : white;
+    line-height   : 2.875rem;
+    box-shadow    : 0 0 4px $gray;
+    border-radius : 0;
+    .navbar-nav {
+        li {
+            margin-right : 3.125rem;
+            a {
+                color : $gray-dark;
+                &.router-link-active {
+                    color         : white;
+                    font-weight   : bold;
+                    border-bottom : 2px solid white;
+                }
+            }
+        }
+    }
+}
