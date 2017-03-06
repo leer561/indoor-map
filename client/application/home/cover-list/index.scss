@@ -1,0 +1,20 @@
+@import "../../../css/variables";
+
+#cover-list {
+    background : white;
+    margin-top : 2rem;
+    border: $gray-lighter solid 1px;
+    h5 {
+        padding       : .5rem;
+        line-height   : 2rem;
+        background    : $brand-info;
+        margin-bottom : 0;
+        color         : white;
+        font-size     : $font-size-base;
+        font-weight   : $font-weight-base;
+    }
+    .badge {
+        line-height : $line-height-lg;
+        cursor      : pointer;
+    }
+}

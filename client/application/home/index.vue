@@ -1,10 +1,12 @@
 <script>
     import konvaStage from './konva-stage'
     import coverType from './cover-type'
+    import coverList from './cover-list'
 	export default {
     	components:{
     		konvaStage,
-            coverType
+            coverType,
+			coverList
         }
 	}
 </script>
@@ -17,6 +19,7 @@
             </div>
             <div class="col-2">
                 <cover-type></cover-type>
+                <cover-list></cover-list>
             </div>
         </div>
 
