@@ -1,8 +1,10 @@
 <script>
     import konvaStage from './konva-stage'
+    import coverType from './cover-type'
 	export default {
     	components:{
-    		konvaStage
+    		konvaStage,
+            coverType
         }
 	}
 </script>
@@ -13,7 +15,9 @@
             <div class="col-10">
                 <konva-stage></konva-stage>
             </div>
-            <div class="col-2"></div>
+            <div class="col-2">
+                <cover-type></cover-type>
+            </div>
         </div>
 
     </div>
