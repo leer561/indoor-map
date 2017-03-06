@@ -10,7 +10,7 @@
 						width: 1366,
 						height: 768
 					})
-					let layer = new Konva.Layer()
+					let imgLayer = new Konva.Layer()
 
 					// 添加背景图
 					let imageObj = new Image()
@@ -23,9 +23,23 @@
 							width: 1366,
 							height: 768
 						})
-						layer.add(yoda)
-						stage.add(layer)
+						imgLayer.add(yoda)
+						stage.add(imgLayer)
+						imgLayer.moveToBottom()
+						imgLayer.draw()
 					}
+
+					// 添加遮罩图层
+					let coverLayer = new Konva.Layer({opacity: 0.5})
+					// 添加临时矩形与绘图层
+					let moveRect
+					let moveLayer = new Konva.Layer({opacity: 0.5})
+
+					stage.add(coverLayer)
+					stage.add(moveLayer)
+
+					// 画出的遮罩
+					let coverHash = {}
 
 					// 获取长宽函数
 					let getSize = (pointStart, pointEnd) => {
@@ -34,19 +48,36 @@
 							height: pointEnd.y - pointStart.y
 						}
 					}
-                    
 
 					// 监听事件
 					stage.on('mousedown', () => {
 						let pointStart = stage.getPointerPosition()
+						moveRect = new Konva.Rect({
+							x: pointStart.x,
+							y: pointStart.y,
+							width: 1,
+							height: 1,
+							fill: 'green',
+							stroke: 'black',
+							strokeWidth: 1
+						})
+						moveLayer.add(moveRect)
+
+						// 鼠标移动
 						stage.on('mousemove', () => {
-							let pointEnd = stage.getPointerPosition()
-							console.log('usual mousemove ' + JSON.stringify(stage.getPointerPosition()))
+							moveRect.size(getSize(pointStart, stage.getPointerPosition()))
+							moveLayer.draw()
 						})
 					})
 
 					stage.on('mouseup', () => {
-						console.log('usual mouseup ' + JSON.stringify(stage.getPointerPosition()))
+						let rect = moveRect.clone()
+						rect.size(getSize(rect.position(), stage.getPointerPosition()))
+						moveRect.destroy()
+						moveRect = null
+						coverLayer.add(rect)
+						coverLayer.draw()
+						moveLayer.draw()
 						stage.off('mousemove')
 					})
 
