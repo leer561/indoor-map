@@ -1,0 +1,12 @@
+#cover-list
+    h5 标记列表
+    table.table
+        tr
+            th 名称
+            th 图形
+            th 操作
+        tr(v-for="cover in list")
+            td {{cover.name}}
+            td {{cover.type}}
+            td
+                span.badge.badge-danger 删除
