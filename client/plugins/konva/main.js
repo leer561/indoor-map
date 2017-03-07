@@ -1,12 +1,13 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
 
-
 export default class KonvaMap {
 	constructor() {
 		this.stage = new Konva.Stage(CONFIG.SIZE)
+
 		// 添加遮罩图层
 		this.coverLayer = new Konva.Layer({opacity: 0.5})
+
 		// 添加临时矩形与绘图层
 		this.moveRect = null
 		this.moveLayer = new Konva.Layer({opacity: 0.5})
@@ -15,13 +16,14 @@ export default class KonvaMap {
 		this.stage.add(this.moveLayer)
 	}
 
-	addBackGroundImg() {
-		let stage = this.stage
+	addBackGroundImg(img = CONFIG.IMG) {
 		let imgLayer = new Konva.Layer()
+
 		// 添加背景图
 		let imageObj = new Image()
-		imageObj.src = CONFIG.IMG
-		imageObj.onload = function () {
+		imageObj.src = img
+
+		imageObj.onload = () => {
 			let yoda = new Konva.Image({
 				x: 0,
 				y: 0,
@@ -30,7 +32,7 @@ export default class KonvaMap {
 				height: CONFIG.SIZE.height
 			})
 			imgLayer.add(yoda)
-			stage.add(imgLayer)
+			this.stage.add(imgLayer)
 			imgLayer.moveToBottom()
 			imgLayer.draw()
 		}
@@ -61,13 +63,18 @@ export default class KonvaMap {
 		this.stage.on('mouseup', () => {
 			if (!this.moveRect) return
 			let rect = this.moveRect.clone()
-			rect.size(CONFIG.getSize(rect.position(), this.stage.getPointerPosition()))
+			let pointStart = rect.position()
+			let pointEnd = this.stage.getPointerPosition()
+			rect.size(CONFIG.getSize(pointStart, pointEnd))
 			this.moveRect.destroy()
 			this.moveRect = null
 			this.coverLayer.add(rect)
 			this.coverLayer.draw()
 			this.moveLayer.draw()
 			this.stage.off('mousemove')
+
+			// 更新坐标数据
+			KonvaMap.output([pointStart,pointEnd])
 		})
 	}
 }
