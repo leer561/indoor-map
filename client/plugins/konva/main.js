@@ -8,11 +8,13 @@ export default class KonvaMain {
 		// 添加遮罩图层
 		this.coverLayer = new Konva.Layer({opacity: 0.5})
 		this.stage.add(this.coverLayer)
+
+		// 添加背景图层
+		this.imgLayer = new Konva.Layer()
+		this.stage.add(this.imgLayer)
 	}
 
 	addBackGroundImg(img = CONFIG.IMG) {
-		let imgLayer = new Konva.Layer()
-
 		// 添加背景图
 		let imageObj = new Image()
 		imageObj.src = img
@@ -25,10 +27,9 @@ export default class KonvaMain {
 				width: CONFIG.SIZE.width,
 				height: CONFIG.SIZE.height
 			})
-			imgLayer.add(yoda)
-			this.stage.add(imgLayer)
-			imgLayer.moveToBottom()
-			imgLayer.draw()
+			this.imgLayer.add(yoda)
+			this.imgLayer.moveToBottom()
+			this.imgLayer.draw()
 		}
 	}
 }

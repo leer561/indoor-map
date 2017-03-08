@@ -17,10 +17,10 @@
             <div class="col-10">
                 <konva-stage></konva-stage>
             </div>
-            <div class="col-2">
-                <cover-type></cover-type>
-                <cover-list></cover-list>
-            </div>
+            <!--<div class="col-2">-->
+                <!--<cover-type></cover-type>-->
+                <!--<cover-list></cover-list>-->
+            <!--</div>-->
         </div>
 
     </div>
