@@ -70,7 +70,7 @@ export default class KonvaMap extends KonvaMain {
 			}
 
 			// 鼠标移动
-			this.imgLayer.on('mousemove', () => {
+			this.stage.on('mousemove', () => {
 				// 根据图形类型开始绘图
 				switch (this.graphicType) {
 					case 'rect':
@@ -86,7 +86,7 @@ export default class KonvaMap extends KonvaMain {
 			})
 		})
 
-		this.imgLayer.on('mouseup', () => {
+		this.stage.on('mouseup', () => {
 			if (!this.moveShape) return
 			let shape = this.moveShape.clone()
 			let pointStart = shape.position()
@@ -115,11 +115,12 @@ export default class KonvaMap extends KonvaMain {
 					break
 			}
 
+
 			// 销毁临时图形
 			this.moveShape.destroy()
 			this.moveShape = null
 			this.moveLayer.draw()
-			this.imgLayer.off('mousemove')
+			this.stage.off('mousemove')
 
 			// 添加到确定图层
 			this.certainLayer.add(shape)
