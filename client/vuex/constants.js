@@ -1,5 +1,9 @@
-// dataExpress接收数据存入store
-export const RECEIVE = 'RECEIVE'
+// konva 选择遮罩的图形
+export const SELECT_GRAPH = 'SELECT_GRAPH'
+// konva 输出得到的图形坐标
+export const OUTPUT_COORDINATE = 'OUTPUT_COORDINATE'
+// konva 得到坐标后 清除图形类型
+export const CLEAR_GRAPH = 'CLEAR_GRAPH'
 
 // 键盘的回车键与取消键对应的编码
 export const ENTER_KEY = 13

@@ -9,6 +9,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.use(vueResource)
 
+import konva from './plugins/konva'
+Vue.use(konva)
+
 import {sync} from 'vuex-router-sync'
 import App from './App'
 import router from './router'

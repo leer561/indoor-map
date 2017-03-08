@@ -1,0 +1,29 @@
+@import "../../../css/variables";
+
+#cover-type {
+    background : $btn-secondary-bg;
+    border     : $gray-lighter solid 1px;
+    h5 {
+        padding       : .5rem;
+        line-height   : 2rem;
+        background    : $brand-info;
+        margin-bottom : 0;
+        color         : white;
+        font-size     : $font-size-base;
+        font-weight   : $font-weight-base;
+    }
+    .btn-group {
+        overflow : hidden;
+        > .btn:first-child {
+            border-left : none;
+        }
+        > .btn:last-child {
+            border-right : none;
+        }
+        > .btn {
+            border-bottom : none;
+            border-top    : none;
+            cursor        : pointer;
+        }
+    }
+}
