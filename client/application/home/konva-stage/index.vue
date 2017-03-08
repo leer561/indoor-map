@@ -1,5 +1,15 @@
 <script>
+    import Konva from '../../../plugins/konva/konva-map'
 	export default {
+    	directives:{
+    		konva:{
+				inserted: function (el, binding, vnode) {
+					let konva = new Konva()
+					konva.addBackGroundImg()
+                    konva.bindEvents()
+				}
+			}
+        }
 	}
 </script>
 
