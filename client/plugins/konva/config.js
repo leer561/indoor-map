@@ -5,11 +5,18 @@ export const SIZE = {
 	height: 768
 }
 
+// 矩形需要的长宽
 export let getSize = (pointStart, pointEnd) => {
 	return {
 		width: pointEnd.x - pointStart.x,
 		height: pointEnd.y - pointStart.y
 	}
+}
+
+// 圆形需要的半径
+export let getRadius = (pointStart, pointEnd) => {
+	let temp = Math.pow((pointEnd.x - pointStart.x), 2) + Math.pow((pointEnd.y - pointStart.y), 2)
+	return Math.round(Math.sqrt(temp))
 }
 
 // 绘图工具的图形
