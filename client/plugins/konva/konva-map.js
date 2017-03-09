@@ -1,6 +1,7 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
 import KonvaMain from './main'
+import $ from 'jquery'
 
 export default class KonvaMap extends KonvaMain {
 	constructor() {
@@ -36,6 +37,21 @@ export default class KonvaMap extends KonvaMain {
 
 	// 监听鼠标绘制遮罩
 	bindEvents() {
+
+		// 监听键盘ESC取消绘制
+		$(document).on('keydown', e => {
+			if (e.keyCode !== 27) return
+			// 取消事件绑定
+			this.stage.off('mousemove')
+
+			// 注销元素
+			if(!this.moveShape) return
+			this.graphicType = null
+			this.moveShape.destroy()
+			this.moveShape = null
+			this.moveLayer.draw()
+		})
+
 		// 监听事件
 		this.imgLayer.on('mousedown', () => {
 			console.log('this.graphicType', this.graphicType)
@@ -114,7 +130,6 @@ export default class KonvaMap extends KonvaMain {
 					})
 					break
 			}
-
 
 			// 销毁临时图形
 			this.moveShape.destroy()
