@@ -19,6 +19,11 @@ export let getRadius = (pointStart, pointEnd) => {
 	return Math.round(Math.sqrt(temp))
 }
 
+// 多边形是否靠近起点的判断
+export let checkClosed = (pointStart, pointEnd, consult = 5) => {
+	return Math.abs(pointEnd.x - pointStart.x) <= consult || Math.abs(pointEnd.y - pointStart.y) <= consult
+}
+
 // 绘图工具的图形
 export const RECT = require('../../assets/rect.png')
 export const POLYGON = require('../../assets/polygon.png')

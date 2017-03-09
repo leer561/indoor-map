@@ -1,7 +1,6 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
 import KonvaMain from './main'
-import $ from 'jquery'
 
 export default class KonvaMap extends KonvaMain {
 	constructor() {
@@ -26,6 +25,9 @@ export default class KonvaMap extends KonvaMain {
 		// 图形备注
 		this.remark = null
 
+		// 图形起始点
+		this.pointStart = null
+
 		// 指令图层
 		this.instructionLayer = new Konva.Layer()
 		this.stage.add(this.instructionLayer)
@@ -45,25 +47,24 @@ export default class KonvaMap extends KonvaMain {
 			this.stage.off('mousemove')
 
 			// 注销元素
-			if(!this.moveShape) return
-			this.graphicType = null
+			if (!this.moveShape) return
 			this.moveShape.destroy()
-			this.moveShape = null
+			this.graphicType = this.pointStart = this.moveShape = null
 			this.moveLayer.draw()
 		})
 
-		// 监听事件
+		// 监听事件绘制图形
 		this.imgLayer.on('mousedown', () => {
 			console.log('this.graphicType', this.graphicType)
 			if (!this.graphicType) return
-			let pointStart = this.stage.getPointerPosition()
 
 			// 根据图形类型开始绘图
 			switch (this.graphicType) {
 				case 'rect':
+					this.pointStart = this.stage.getPointerPosition()
 					this.moveShape = new Konva.Rect({
-						x: pointStart.x,
-						y: pointStart.y,
+						x: this.pointStart.x,
+						y: this.pointStart.y,
 						width: 1,
 						height: 1,
 						fill: 'green',
@@ -73,9 +74,10 @@ export default class KonvaMap extends KonvaMain {
 					this.moveLayer.add(this.moveShape)
 					break
 				case 'circular':
+					this.pointStart = this.stage.getPointerPosition()
 					this.moveShape = new Konva.Circle({
-						x: pointStart.x,
-						y: pointStart.y,
+						x: this.pointStart.x,
+						y: this.pointStart.y,
 						radius: 1,
 						fill: 'red',
 						stroke: 'black',
@@ -83,18 +85,61 @@ export default class KonvaMap extends KonvaMain {
 					})
 					this.moveLayer.add(this.moveShape)
 					break
+				case 'polygon':
+					// 判断是否存在图形，存在就继续绘制
+					let currentPoint = this.stage.getPointerPosition()
+					if (this.moveShape) {
+						let point = this.moveShape.points()
+
+						// 判断是否靠近坐标点
+						if (CONFIG.checkClosed(this.pointStart, currentPoint) && point.length > 5) {
+							this.moveShape.closed(true)
+							KonvaMap.output({
+								type: this.graphicType,
+								coordinate: point,
+								name: this.remark
+							})
+
+							let shape = this.moveShape.clone()
+							this.moveShape.destroy()
+							this.moveLayer.draw()
+
+							this.certainLayer.add(shape)
+							this.certainLayer.draw()
+							this.graphicType = this.pointStart = this.moveShape = null
+						}else {
+							this.moveShape.points(point.concat(_.values(currentPoint)))
+							this.moveLayer.draw()
+						}
+					} else {
+						this.moveShape = new Konva.Line({
+							points: _.values(currentPoint),
+							fill: '#00D2FF',
+							stroke: 'black',
+							strokeWidth: 1,
+							closed: false
+						})
+						this.moveLayer.add(this.moveShape)
+						// 多边形多次点击 起点记录需要判断
+						this.pointStart = currentPoint
+					}
+
+					break
 			}
+
+			// 多边形不需要鼠标悬停
+			if (this.graphicType === 'polygon') return
 
 			// 鼠标移动
 			this.stage.on('mousemove', () => {
 				// 根据图形类型开始绘图
 				switch (this.graphicType) {
 					case 'rect':
-						this.moveShape.size(CONFIG.getSize(pointStart, this.stage.getPointerPosition()))
+						this.moveShape.size(CONFIG.getSize(this.pointStart, this.stage.getPointerPosition()))
 						this.moveLayer.draw()
 						break
 					case 'circular':
-						this.moveShape.radius(CONFIG.getRadius(pointStart, this.stage.getPointerPosition()))
+						this.moveShape.radius(CONFIG.getRadius(this.pointStart, this.stage.getPointerPosition()))
 						this.moveLayer.draw()
 						break
 				}
@@ -103,46 +148,42 @@ export default class KonvaMap extends KonvaMain {
 		})
 
 		this.stage.on('mouseup', () => {
-			if (!this.moveShape) return
+			if (!this.moveShape || this.graphicType === 'polygon') return
+			// 非多边形绘制
 			let shape = this.moveShape.clone()
-			let pointStart = shape.position()
 			let pointEnd = this.stage.getPointerPosition()
 
 			// 根据图形类型处理
 			switch (this.graphicType) {
 				case 'rect':
-					shape.size(CONFIG.getSize(pointStart, pointEnd))
+					shape.size(CONFIG.getSize(this.pointStart, pointEnd))
 					KonvaMap.output({
 						type: this.graphicType,
-						coordinate: [pointStart, pointEnd],
+						coordinate: [this.pointStart, pointEnd],
 						name: this.remark
 					})
 					break
 				case 'circular':
-					shape.radius(CONFIG.getRadius(pointStart, pointEnd))
+					shape.radius(CONFIG.getRadius(this.pointStart, pointEnd))
 					KonvaMap.output({
 						type: this.graphicType,
 						coordinate: {
-							position: pointStart,
+							position: this.pointStart,
 							radius: shape.radius()
 						},
 						name: this.remark
 					})
 					break
 			}
-
 			// 销毁临时图形
 			this.moveShape.destroy()
-			this.moveShape = null
 			this.moveLayer.draw()
 			this.stage.off('mousemove')
 
 			// 添加到确定图层
 			this.certainLayer.add(shape)
 			this.certainLayer.draw()
-
-			// 清空类型
-			this.graphicType = null
+			this.graphicType = this.pointStart = this.moveShape = null
 		})
 	}
 }
