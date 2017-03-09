@@ -55,7 +55,6 @@ export default class KonvaMap extends KonvaMain {
 
 		// 监听事件绘制图形
 		this.imgLayer.on('mousedown', () => {
-			console.log('this.graphicType', this.graphicType)
 			if (!this.graphicType) return
 
 			// 根据图形类型开始绘图
@@ -90,7 +89,6 @@ export default class KonvaMap extends KonvaMain {
 					let currentPoint = this.stage.getPointerPosition()
 					if (this.moveShape) {
 						let point = this.moveShape.points()
-
 						// 判断是否靠近坐标点
 						if (CONFIG.checkClosed(this.pointStart, currentPoint) && point.length > 5) {
 							this.moveShape.closed(true)
@@ -107,7 +105,9 @@ export default class KonvaMap extends KonvaMain {
 							this.certainLayer.add(shape)
 							this.certainLayer.draw()
 							this.graphicType = this.pointStart = this.moveShape = null
-						}else {
+
+							return
+						} else {
 							this.moveShape.points(point.concat(_.values(currentPoint)))
 							this.moveLayer.draw()
 						}
@@ -128,7 +128,7 @@ export default class KonvaMap extends KonvaMain {
 			}
 
 			// 多边形不需要鼠标悬停
-			if (this.graphicType === 'polygon') return
+			if (!this.graphicType || this.graphicType === 'polygon') return
 
 			// 鼠标移动
 			this.stage.on('mousemove', () => {
