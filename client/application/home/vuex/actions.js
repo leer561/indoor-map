@@ -1,7 +1,7 @@
 import TYPES from './types'
 
 export default {
-	'selectCover': ({commit}, cover) => {
-		commit(TYPES.SELECT_COVER, cover)
+	'deleteCover': ({commit}, cover) => {
+		commit(TYPES.DELETE_COVER, cover)
 	}
 }

@@ -9,4 +9,4 @@
             td {{cover.name}}
             td {{cover.type}}
             td
-                span.badge.badge-danger 删除
+                span.badge.badge-danger(v-on:click="deleteCover(cover)") 删除

@@ -1,5 +1,6 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
+import * as TYPES from '../../vuex/constants'
 
 export default class KonvaMain {
 	constructor(size = CONFIG.SIZE) {
@@ -13,6 +14,7 @@ export default class KonvaMain {
 		this.imgLayer = new Konva.Layer()
 		this.stage.add(this.imgLayer)
 	}
+
 
 	addBackGroundImg(img = CONFIG.IMG) {
 		// 添加背景图

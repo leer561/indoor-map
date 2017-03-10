@@ -1,10 +1,16 @@
 <script>
+	import {mapActions} from 'vuex'
 	export default {
-		data: () => {
-			return {
-				list: [{name:'建筑物A', type:'矩形'},{name:'建筑物A', type:'矩形'}]
+		computed: {
+			list () {
+				return this.$store.state.konva.coordinate
 			}
-		}
+		},
+		methods:{
+			...mapActions([
+				'deleteCover'
+			])
+        }
 	}
 </script>
 

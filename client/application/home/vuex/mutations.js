@@ -1,7 +1,7 @@
 import TYPES from './types'
 
 export default {
-	[TYPES.SELECT_COVER]: (state, cover) => {
-		state.covers.push(cover)
+	[TYPES.DELETE_COVER]: (state, cover) => {
+		_.remove(state.konva.coordinate, cover)
 	}
 }

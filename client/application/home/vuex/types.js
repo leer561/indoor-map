@@ -1,5 +1,5 @@
 // 选择遮罩
-const SELECT_COVER = 'SELECT_COVER'
+const DELETE_COVER = 'DELETE_COVER'
 export default {
-	SELECT_COVER
+	DELETE_COVER
 }
