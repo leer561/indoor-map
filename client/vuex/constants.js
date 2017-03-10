@@ -1,6 +1,6 @@
 // konva
 // 选择遮罩的图形
-export const SELECT_GRAPH = 'SELECT_GRAPH'
+export const SELECT_TYPE = 'SELECT_TYPE'
 // 输出得到的图形坐标
 export const OUTPUT_COVER = 'OUTPUT_COVER'
 // 得到坐标后 清除图形类型

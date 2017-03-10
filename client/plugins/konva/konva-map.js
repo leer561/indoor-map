@@ -27,14 +27,6 @@ export default class KonvaMap extends KonvaMain {
 
 		// 图形起始点
 		this.pointStart = null
-
-		// 指令图层
-		this.instructionLayer = new Konva.Layer()
-		this.stage.add(this.instructionLayer)
-
-		// 添加指令图形
-		CONFIG.addBackColor.call(this)
-		CONFIG.addInstrction.call(this)
 	}
 
 	// 监听鼠标绘制遮罩
@@ -100,6 +92,7 @@ export default class KonvaMap extends KonvaMain {
 								name: this.remark,
 								id: this.moveShape.id()
 							})
+							vue.selectType(null)
 
 							let shape = this.moveShape.clone()
 							this.moveShape.destroy()
@@ -169,6 +162,7 @@ export default class KonvaMap extends KonvaMain {
 						name: this.remark,
 						id: this.moveShape.id()
 					})
+					vue.selectType(null)
 					break
 				case 'circular':
 					shape.radius(CONFIG.getRadius(this.pointStart, pointEnd))
@@ -181,6 +175,7 @@ export default class KonvaMap extends KonvaMain {
 						name: this.remark,
 						id: this.moveShape.id()
 					})
+					vue.selectType(null)
 					break
 			}
 			// 销毁临时图形

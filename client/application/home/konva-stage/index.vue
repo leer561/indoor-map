@@ -1,6 +1,7 @@
 <script>
 	import Konva from '../../../plugins/konva/konva-map'
 	import coverList from '../cover-list'
+    import coverType from '../cover-type'
 	export default {
 		// 实例挂载后的生命周期，不保证组件已在document中
 		mounted(){
@@ -14,26 +15,39 @@
 
 		},
 		methods: {
+			// 删除图形
 			deleteFromCovers:function (cover) {
                 this.deleteCover(cover)
                 this.konva.deleteCover(cover)
 			},
+			// 选择图形类型
+			selectCoverType:function (type) {
+				this.selectType(type)
+				this.konva.graphicType = type
+			},
 			...Vuex.mapActions('home', [
 				'outputCover',
-                'deleteCover'
+                'deleteCover',
+                'selectType'
 			])
 		},
 		components: {
-			coverList
+			coverList,
+			coverType
 		}
 
 	}
 </script>
 
 <template>
-    <div>
-        <div id="konva-stage"></div>
-        <cover-list v-on:delete = 'deleteFromCovers'></cover-list>
+    <div class="row">
+        <div class="col-10">
+            <div id="konva-stage"></div>
+            <cover-list v-on:delete = 'deleteFromCovers'></cover-list>
+        </div>
+        <div class="col-2">
+            <cover-type v-on:selectType = 'selectCoverType'></cover-type>
+        </div>
     </div>
 </template>
 
