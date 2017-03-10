@@ -39,6 +39,7 @@ export default class KonvaMap extends KonvaMain {
 			this.moveShape.destroy()
 			this.graphicType = this.pointStart = this.moveShape = null
 			this.moveLayer.draw()
+			vue.selectType(null)
 		})
 
 		// 监听事件绘制图形
