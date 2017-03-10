@@ -3,6 +3,8 @@
 #cover-type {
     background : $btn-secondary-bg;
     border     : $gray-lighter solid 1px;
+    width      : 5rem;
+    text-align : center;
     h5 {
         padding       : .5rem;
         line-height   : 2rem;
@@ -12,18 +14,18 @@
         font-size     : $font-size-base;
         font-weight   : $font-weight-base;
     }
-    .btn-group {
-        overflow : hidden;
-        > .btn:first-child {
-            border-left : none;
-        }
-        > .btn:last-child {
-            border-right : none;
-        }
-        > .btn {
-            border-bottom : none;
-            border-top    : none;
-            cursor        : pointer;
+    ul {
+        li {
+            border-top  : $gray-lightest solid 1px;
+            line-height : 4;
+            cursor      : pointer;
+            &:hover {
+                background : $gray-lighter;
+            }
+            &.active {
+                background : $brand-primary;
+                color      : white;
+            }
         }
     }
 }
