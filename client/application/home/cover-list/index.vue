@@ -1,16 +1,8 @@
 <script>
-	import {mapActions} from 'vuex'
 	export default {
-		computed: {
-			list () {
-				return this.$store.state.konva.coordinate
-			}
-		},
-		methods:{
-			...mapActions([
-				'deleteCover'
-			])
-        }
+		computed: Vuex.mapState('home', [
+			'covers'
+		])
 	}
 </script>
 

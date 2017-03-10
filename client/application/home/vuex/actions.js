@@ -1,6 +1,9 @@
-import TYPES from './types'
+import * as TYPES from '../../../vuex/constants'
 
 export default {
+	'outputCover': ({commit}, data) => {
+		commit(TYPES.OUTPUT_COVER, data)
+	},
 	'deleteCover': ({commit}, cover) => {
 		commit(TYPES.DELETE_COVER, cover)
 	}

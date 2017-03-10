@@ -1,4 +1,3 @@
-// real-time page store, namespace: 'realTime/' not merge
 
 const state = {
 	covers: [],

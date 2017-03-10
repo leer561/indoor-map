@@ -2,7 +2,7 @@
 // 选择遮罩的图形
 export const SELECT_GRAPH = 'SELECT_GRAPH'
 // 输出得到的图形坐标
-export const OUTPUT_COORDINATE = 'OUTPUT_COORDINATE'
+export const OUTPUT_COVER = 'OUTPUT_COVER'
 // 得到坐标后 清除图形类型
 export const CLEAR_GRAPH = 'CLEAR_GRAPH'
 // 删除选中的cover

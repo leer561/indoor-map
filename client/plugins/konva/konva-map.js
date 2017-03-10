@@ -38,7 +38,7 @@ export default class KonvaMap extends KonvaMain {
 	}
 
 	// 监听鼠标绘制遮罩
-	bindEvents() {
+	bindEvents(vue) {
 
 		// 监听键盘ESC取消绘制
 		$(document).on('keydown', e => {
@@ -92,7 +92,7 @@ export default class KonvaMap extends KonvaMain {
 						// 判断是否靠近坐标点
 						if (CONFIG.checkClosed(this.pointStart, currentPoint) && point.length > 5) {
 							this.moveShape.closed(true)
-							KonvaMap.output({
+							vue.outputCover({
 								type: this.graphicType,
 								coordinate: point,
 								name: this.remark
@@ -143,7 +143,6 @@ export default class KonvaMap extends KonvaMain {
 						this.moveLayer.draw()
 						break
 				}
-
 			})
 		})
 
@@ -157,7 +156,7 @@ export default class KonvaMap extends KonvaMain {
 			switch (this.graphicType) {
 				case 'rect':
 					shape.size(CONFIG.getSize(this.pointStart, pointEnd))
-					KonvaMap.output({
+					vue.outputCover({
 						type: this.graphicType,
 						coordinate: [this.pointStart, pointEnd],
 						name: this.remark
@@ -165,7 +164,7 @@ export default class KonvaMap extends KonvaMain {
 					break
 				case 'circular':
 					shape.radius(CONFIG.getRadius(this.pointStart, pointEnd))
-					KonvaMap.output({
+					vue.outputCover({
 						type: this.graphicType,
 						coordinate: {
 							position: this.pointStart,

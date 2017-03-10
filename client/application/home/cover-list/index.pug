@@ -5,8 +5,8 @@
             th 名称
             th 图形
             th 操作
-        tr(v-for="cover in list")
+        tr(v-for="cover in covers")
             td {{cover.name}}
             td {{cover.type}}
             td
-                span.badge.badge-danger(v-on:click="deleteCover(cover)") 删除
+                span.badge.badge-danger(v-on:click="") 删除
