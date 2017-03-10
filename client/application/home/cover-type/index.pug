@@ -1,4 +1,4 @@
 #cover-type
-    h5 选择形状
-    .btn-group
-        button.btn.btn-secondary(type="button" v-for="type in types") {{type}}
+    h5 图形
+    ul.list-unstyled
+        li( v-for="(value, key) in types" v-on:click="selectType(value)" v-bind:class="{ active: selectedType==value }") {{key}}

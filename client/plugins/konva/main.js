@@ -1,18 +1,16 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
+import * as TYPES from '../../vuex/constants'
 
 export default class KonvaMain {
 	constructor(size = CONFIG.SIZE) {
 		this.stage = new Konva.Stage(size)
 
-		// 添加遮罩图层
-		this.coverLayer = new Konva.Layer({opacity: 0.5})
-		this.stage.add(this.coverLayer)
-
 		// 添加背景图层
 		this.imgLayer = new Konva.Layer()
 		this.stage.add(this.imgLayer)
 	}
+
 
 	addBackGroundImg(img = CONFIG.IMG) {
 		// 添加背景图

@@ -1,7 +1,6 @@
-// real-time page store, namespace: 'realTime/' not merge
-
 const state = {
 	covers: [],
+	selectedType: null
 }
 
 import mutations from './mutations'

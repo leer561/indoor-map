@@ -50,7 +50,9 @@ module.exports = {
 	plugins: [
 		new webpack.ProvidePlugin({
 			Vue: 'vue',
-			Vuex: 'vuex'
+			Vuex: 'vuex',
+			$: 'jquery',
+			_: 'lodash'
 		}),
 		new HtmlWebpackPlugin({
 			title: config.title,
