@@ -4,11 +4,7 @@ import KonvaMain from './main'
 
 export default class KonvaMap extends KonvaMain {
 	constructor() {
-		super({
-			container: 'konva-stage',
-			width: 1406,
-			height: 768
-		})
+		super()
 		// 添加遮罩图层
 		this.certainLayer = new Konva.Layer({opacity: 0.5})
 
