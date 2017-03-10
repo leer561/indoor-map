@@ -1,9 +1,12 @@
-// konva 选择遮罩的图形
+// konva
+// 选择遮罩的图形
 export const SELECT_GRAPH = 'SELECT_GRAPH'
-// konva 输出得到的图形坐标
-export const OUTPUT_COORDINATE = 'OUTPUT_COORDINATE'
-// konva 得到坐标后 清除图形类型
+// 输出得到的图形坐标
+export const OUTPUT_COVER = 'OUTPUT_COVER'
+// 得到坐标后 清除图形类型
 export const CLEAR_GRAPH = 'CLEAR_GRAPH'
+// 删除选中的cover
+export const DELETE_COVER = 'DELETE_COVER'
 
 // 键盘的回车键与取消键对应的编码
 export const ENTER_KEY = 13
