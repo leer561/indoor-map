@@ -1,6 +1,6 @@
 const state = {
 	covers: [],
-	selectType: null
+	selectedType: null
 }
 
 import mutations from './mutations'

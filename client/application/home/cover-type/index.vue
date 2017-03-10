@@ -9,7 +9,10 @@
 			selectType: function (type) {
 				this.$emit('selectType', type)
 			}
-		}
+		},
+		computed: Vuex.mapState('home', [
+			'selectedType'
+		])
 	}
 </script>
 
