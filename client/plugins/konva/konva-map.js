@@ -6,14 +6,9 @@ import * as UTILS  from './utils'
 export default class KonvaMap extends KonvaMain {
 	constructor() {
 		super()
-		// 添加遮罩图层
-		this.certainLayer = new Konva.Layer({opacity: 0.5})
-
 		// 添加临时矩形与绘图层
 		this.moveShape = null
 		this.moveLayer = new Konva.Layer({opacity: 0.5})
-
-		this.stage.add(this.certainLayer)
 		this.stage.add(this.moveLayer)
 
 		// 选择的图形类型
