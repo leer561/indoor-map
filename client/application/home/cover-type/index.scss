@@ -1,10 +1,10 @@
 @import "../../../css/variables";
 
 #cover-type {
-    background : $btn-secondary-bg;
-    border     : $gray-lighter solid 1px;
+
     width      : 5rem;
     text-align : center;
+    position   : fixed;
     h5 {
         padding       : .5rem;
         line-height   : 2rem;
@@ -13,8 +13,12 @@
         color         : white;
         font-size     : $font-size-base;
         font-weight   : $font-weight-base;
+        border     : $gray-lighter solid 1px;
     }
     ul {
+        margin-bottom : 1rem;
+        background    : $btn-secondary-bg;
+        border     : $gray-lighter solid 1px;
         li {
             border-top  : $gray-lightest solid 1px;
             line-height : 4;
