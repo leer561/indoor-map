@@ -28,21 +28,6 @@ export default class KonvaMap extends KonvaMain {
 
 	// 监听鼠标绘制遮罩
 	bindEvents(vue) {
-
-		// 监听键盘ESC取消绘制
-		$(document).on('keydown', e => {
-			if (e.keyCode !== 27) return
-			// 取消事件绑定
-			this.stage.off('mousemove')
-
-			// 注销元素
-			if (!this.moveShape) return
-			this.moveShape.destroy()
-			this.graphicType = this.pointStart = this.moveShape = null
-			this.moveLayer.draw()
-			vue.selectType(null)
-		})
-
 		// 监听事件绘制图形
 		this.imgLayer.on('mousedown', () => {
 			if (!this.graphicType) return
@@ -69,12 +54,7 @@ export default class KonvaMap extends KonvaMain {
 							this.moveShape.closed(true)
 							UTILS.output.call(this, vue, point)
 							let shape = this.moveShape.clone()
-							this.moveShape.destroy()
-							this.moveLayer.draw()
-
-							this.certainLayer.add(shape)
-							this.certainLayer.draw()
-							this.graphicType = this.pointStart = this.moveShape = null
+							UTILS.completeDrawing.call(this, shape)
 							// 防止条件判断击穿
 							return
 						} else {
@@ -97,24 +77,23 @@ export default class KonvaMap extends KonvaMain {
 			// 鼠标移动
 			this.stage.on('mousemove', () => {
 				// 根据图形类型开始绘图
-				switch (this.graphicType) {
-					case 'rect':
-						this.moveShape.size(UTILS.getSize(this.pointStart, this.stage.getPointerPosition()))
-						this.moveLayer.draw()
-						break
-					case 'circular':
-						this.moveShape.radius(UTILS.getRadius(this.pointStart, this.stage.getPointerPosition()))
-						this.moveLayer.draw()
-						break
+				if (this.graphicType === 'rect') {
+					this.moveShape.size(UTILS.getSize(this.pointStart, this.stage.getPointerPosition()))
 				}
+				if (this.graphicType === 'circular') {
+					this.moveShape.radius(UTILS.getRadius(this.pointStart, this.stage.getPointerPosition()))
+				}
+				this.moveLayer.draw()
 			})
 		})
 
+		// 鼠标抬起
 		this.stage.on('mouseup', () => {
 			if (!this.moveShape || this.graphicType === 'polygon') return
 			// 非多边形绘制
 			let shape = this.moveShape.clone()
 			let pointEnd = this.stage.getPointerPosition()
+			this.stage.off('mousemove')
 
 			// 根据图形类型处理
 			switch (this.graphicType) {
@@ -127,15 +106,16 @@ export default class KonvaMap extends KonvaMain {
 					UTILS.output.call(this, vue, UTILS.getRadius(this.pointStart, pointEnd))
 					break
 			}
-			// 销毁临时图形
-			this.moveShape.destroy()
-			this.moveLayer.draw()
-			this.stage.off('mousemove')
 
 			// 添加到确定图层
-			this.certainLayer.add(shape)
-			this.certainLayer.draw()
-			this.graphicType = this.pointStart = this.moveShape = null
+			UTILS.completeDrawing.call(this, shape)
+		})
+
+		// 监听键盘ESC取消绘制
+		$(document).on('keydown', e => {
+			if (e.keyCode !== 27) return
+			vue.selectType(null)
+			UTILS.cancle.call(this)
 		})
 	}
 

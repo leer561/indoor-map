@@ -90,3 +90,25 @@ export const output = function (vue, point) {
 
 	}
 }
+
+// 绘图完毕转移图层
+export const completeDrawing = function (shape) {
+	this.moveShape.destroy()
+	this.moveLayer.draw()
+
+	this.certainLayer.add(shape)
+	this.certainLayer.draw()
+	this.graphicType = this.pointStart = this.moveShape = null
+}
+
+// 取消绘制
+export const cancle = function () {
+	// 取消事件绑定
+	this.stage.off('mousemove')
+
+	// 注销元素
+	if (!this.moveShape) return
+	this.moveShape.destroy()
+	this.graphicType = this.pointStart = this.moveShape = null
+	this.moveLayer.draw()
+}
