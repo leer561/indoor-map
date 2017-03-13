@@ -7,6 +7,8 @@ export const OUTPUT_COVER = 'OUTPUT_COVER'
 export const CLEAR_GRAPH = 'CLEAR_GRAPH'
 // 删除选中的cover
 export const DELETE_COVER = 'DELETE_COVER'
+// 显示删除菜单
+export const SHOW_DELETE= 'SHOW_DELETE'
 
 // 键盘的回车键与取消键对应的编码
 export const ENTER_KEY = 13

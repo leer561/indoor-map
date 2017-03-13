@@ -4,4 +4,4 @@
         li( v-for="(value, key) in types" v-on:click="selectType(value)" v-bind:class="{ active: selectedType==value }") {{key}}
 
     ul.list-unstyled
-        li 删除
+        li(v-on:click="showDelete(true)") 删除
