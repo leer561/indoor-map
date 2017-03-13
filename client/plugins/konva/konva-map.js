@@ -58,7 +58,7 @@ export default class KonvaMap extends KonvaMain {
 						fill: 'green',
 						stroke: 'black',
 						strokeWidth: 1,
-						id: new Date().getTime()
+						name: String(new Date().getTime())
 					})
 					this.moveLayer.add(this.moveShape)
 					break
@@ -71,7 +71,7 @@ export default class KonvaMap extends KonvaMain {
 						fill: 'red',
 						stroke: 'black',
 						strokeWidth: 1,
-						id: new Date().getTime()
+						name: String(new Date().getTime())
 					})
 					this.moveLayer.add(this.moveShape)
 					break
@@ -86,16 +86,14 @@ export default class KonvaMap extends KonvaMain {
 							vue.outputCover({
 								type: this.graphicType,
 								coordinate: point,
-								name: this.remark,
-								id: this.moveShape.id()
+								remark: this.remark,
+								name: this.moveShape.name()
 							})
 							vue.selectType(null)
 
 							let shape = this.moveShape.clone()
 							this.moveShape.destroy()
 							this.moveLayer.draw()
-							// clone后因为id的唯一性，需要重新设置
-							shape.id(this.moveShape.id())
 
 							this.certainLayer.add(shape)
 							this.certainLayer.draw()
@@ -114,7 +112,7 @@ export default class KonvaMap extends KonvaMain {
 							stroke: 'black',
 							strokeWidth: 1,
 							closed: false,
-							id: new Date().getTime()
+							name: String(new Date().getTime())
 						})
 						this.moveLayer.add(this.moveShape)
 						// 多边形多次点击 起点记录需要判断
@@ -156,8 +154,8 @@ export default class KonvaMap extends KonvaMain {
 					vue.outputCover({
 						type: this.graphicType,
 						coordinate: [this.pointStart, pointEnd],
-						name: this.remark,
-						id: this.moveShape.id()
+						remark: this.remark,
+						name: this.moveShape.name()
 					})
 					vue.selectType(null)
 					break
@@ -169,15 +167,14 @@ export default class KonvaMap extends KonvaMain {
 							position: this.pointStart,
 							radius: shape.radius()
 						},
-						name: this.remark,
-						id: this.moveShape.id()
+						remark: this.remark,
+						name: this.moveShape.name()
 					})
 					vue.selectType(null)
 					break
 			}
 			// 销毁临时图形
 			this.moveShape.destroy()
-			shape.id(this.moveShape.id())
 			this.moveLayer.draw()
 			this.stage.off('mousemove')
 
@@ -190,10 +187,10 @@ export default class KonvaMap extends KonvaMain {
 
 	// 删除方法
 	deleteCover(cover) {
-		if (!cover.id) return
-		let shapeId = `#${cover.id}`
-		let shape = this.certainLayer.findOne(shapeId)
-		shape.destroy()
+		if (!cover.name) return
+		let shapeName = `.${cover.name}`
+		let shape = this.certainLayer.find(shapeName)
+		shape.each(e => e.destroy())
 		this.certainLayer.draw()
 	}
 }
