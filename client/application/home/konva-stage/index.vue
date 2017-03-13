@@ -32,6 +32,9 @@
 				'selectType'
 			])
 		},
+		computed: Vuex.mapState('home', [
+			'showDelete'
+		]),
 		components: {
 			coverList,
 			coverType
@@ -44,7 +47,7 @@
     <div class="row">
         <div class="col-10">
             <div id="konva-stage"></div>
-            <cover-list v-on:delete='deleteFromCovers'></cover-list>
+            <cover-list v-on:delete='deleteFromCovers' v-if="showDelete"></cover-list>
         </div>
         <div class="col-2">
             <cover-type v-on:selectType='selectCoverType'></cover-type>

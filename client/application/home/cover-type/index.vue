@@ -8,7 +8,10 @@
 		methods: {
 			selectType: function (type) {
 				this.$emit('selectType', type)
-			}
+			},
+			...Vuex.mapActions('home', [
+				'showDelete'
+			])
 		},
 		computed: Vuex.mapState('home', [
 			'selectedType'

@@ -1,9 +1,13 @@
 @import "../../../css/variables";
 
 #cover-list {
-    background : white;
+    position   : absolute;
+    background : rgba(255, 255, 255, .9);
     margin-top : 2rem;
-    border: $gray-lighter solid 1px;
+    border     : $gray-lighter solid 1px;
+    width      : 50%;
+    right      : 0;
+    top        : 0;
     h5 {
         padding       : .5rem;
         line-height   : 2rem;
@@ -12,9 +16,19 @@
         color         : white;
         font-size     : $font-size-base;
         font-weight   : $font-weight-base;
+        width         : 100%;
+        > span.fa {
+            float : right;
+            cursor: pointer;
+            line-height: 2rem;
+        }
     }
-    .badge {
-        line-height : $line-height-lg;
-        cursor      : pointer;
+    .table {
+        width : 100%;
+        .badge {
+            line-height : $line-height-lg;
+            cursor      : pointer;
+        }
     }
+
 }

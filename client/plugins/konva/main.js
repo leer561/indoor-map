@@ -1,6 +1,5 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
-import * as TYPES from '../../vuex/constants'
 
 export default class KonvaMain {
 	constructor(size = CONFIG.SIZE) {
