@@ -49,5 +49,10 @@ export default class KonvaMain {
 		forEach(covers, cover => UTILS.drawCover.call(this, cover))
 		this.certainLayer.draw()
 	}
+
+	// 显示或者隐藏遮罩层
+	showCover(data){
+		this.certainLayer.visible(data)
+	}
 }
 

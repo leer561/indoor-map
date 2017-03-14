@@ -1,4 +1,4 @@
-#cover-type
+.toolbar
     h5 图形
     ul.list-unstyled
         li( v-for="(value, key) in types" v-on:click="selectType(value)" v-bind:class="{ active: selectedType==value }") {{key}}
