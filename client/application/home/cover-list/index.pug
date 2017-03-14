@@ -7,7 +7,7 @@
             th 图形
             th 操作
         tr(v-for="cover in covers")
-            td {{cover.name}}
+            td {{cover.remark}}
             td {{cover.type}}
             td
                 span.badge.badge-danger(v-on:click="deleteCover(cover)") 删除
