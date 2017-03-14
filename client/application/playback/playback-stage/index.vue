@@ -7,10 +7,11 @@
 			konva.addBackGroundImg()
 			this.konva = konva
 
-            // 请求数据
+			// 请求数据
 			this.$http.get('/api/v1/maps/1').then(res => {
 				let covers = res.body
-
+				if (!covers.length) return
+				konva.drawCovers(covers)
 			})
 		},
 		methods: {},
@@ -26,6 +27,7 @@
         </div>
         <div class="col-2">
             是否显示
+
 
         </div>
     </div>

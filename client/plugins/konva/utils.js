@@ -18,12 +18,12 @@ export const checkClosed = (pointStart, pointEnd, consult = 5) => {
 }
 
 // 生成矩形
-export const generateRect = point => {
+export const generateRect = (point, size = {width: 1, height: 1}) => {
 	return new Konva.Rect({
 		x: point.x,
 		y: point.y,
-		width: 1,
-		height: 1,
+		width: size.width,
+		height: size.height,
 		fill: '#8fcf00',
 		stroke: '#333',
 		strokeWidth: 1,
@@ -32,11 +32,11 @@ export const generateRect = point => {
 }
 
 // 生成圆形
-export const generateCircular = point => {
+export const generateCircular = (point, radius = 1) => {
 	return new Konva.Circle({
 		x: point.x,
 		y: point.y,
-		radius: 1,
+		radius: radius,
 		fill: '#ee7c5d',
 		stroke: '#333',
 		strokeWidth: 1,
@@ -44,7 +44,7 @@ export const generateCircular = point => {
 	})
 }
 
-// 生成多边形
+// 生成线
 export const generateLine = point => {
 	return new Konva.Line({
 		points: point,
@@ -56,18 +56,29 @@ export const generateLine = point => {
 	})
 }
 
+// 生成线polygon
+export const generatePolygon = points => {
+	return new Konva.Line({
+		points: points,
+		fill: '#00D2FF',
+		stroke: '#333',
+		strokeWidth: 1,
+		name: String(new Date().getTime()),
+		closed: true
+	})
+}
+
 // 生成文本
-export const generateText = function () {
-	let text = new Konva.Text({
-		x: this.pointStart.x,
-		y: this.pointStart.y,
-		text: this.remark,
+export const generateText = function (point = this.pointStart, remark = this.remark, name = this.moveShape.name()) {
+	return new Konva.Text({
+		x: point.x,
+		y: point.y,
+		text: remark,
 		fontSize: 14,
 		fontFamily: 'Calibri',
 		fill: 'black',
-		name: this.moveShape.name()
+		name: name
 	})
-	this.certainLayer.add(text)
 }
 
 // 输出cover
@@ -111,7 +122,7 @@ export const completeDrawing = function (shape) {
 	this.moveLayer.draw()
 
 	this.certainLayer.add(shape)
-	generateText.call(this)
+	this.certainLayer.add(generateText.call(this))
 	this.certainLayer.draw()
 	this.graphicType = this.pointStart = this.moveShape = null
 }
@@ -145,3 +156,25 @@ export const drawGraphic = function () {
 	this.moveLayer.add(this.moveShape)
 }
 
+// 绘制图形
+export const drawCover = function (cover) {
+	let shape
+	let textPoint
+	switch (cover.type) {
+		case 'rect':
+			shape = generateRect(cover.coordinate[0], getSize(cover.coordinate[0], cover.coordinate[1]))
+			textPoint = cover.coordinate[0]
+			break
+		case 'circular':
+			shape = generateCircular(cover.coordinate.position, cover.coordinate.radius)
+			textPoint = cover.coordinate.position
+			break
+		case 'polygon':
+			shape = generatePolygon(cover.coordinate)
+			textPoint = {x: cover.coordinate[0], y: cover.coordinate[1]}
+			break
+	}
+	shape.name(cover.name)
+	this.certainLayer.add(shape)
+	this.certainLayer.add(generateText(textPoint, cover.remark, cover.name))
+}
