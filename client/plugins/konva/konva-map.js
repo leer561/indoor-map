@@ -2,6 +2,7 @@ import Konva from 'konva'
 import * as CONFIG  from './config'
 import KonvaMain from './main'
 import * as UTILS  from './utils'
+import values from 'lodash/values'
 
 export default class KonvaMap extends KonvaMain {
 	constructor() {
@@ -33,7 +34,7 @@ export default class KonvaMap extends KonvaMain {
 					// 防止条件判断击穿
 					return
 				} else {
-					this.moveShape.points(point.concat(_.values(currentPoint)))
+					this.moveShape.points(point.concat(values(currentPoint)))
 					this.moveLayer.draw()
 				}
 			} else {

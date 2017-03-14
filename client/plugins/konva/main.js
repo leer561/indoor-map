@@ -1,5 +1,7 @@
 import Konva from 'konva'
 import * as CONFIG  from './config'
+import forEach from 'lodash/forEach'
+import * as UTILS from './utils'
 
 export default class KonvaMain {
 	constructor(size = CONFIG.SIZE) {
@@ -13,7 +15,6 @@ export default class KonvaMain {
 		this.certainLayer = new Konva.Layer({opacity: 0.5})
 		this.stage.add(this.certainLayer)
 	}
-
 
 	addBackGroundImg(img = CONFIG.IMG) {
 		// 添加背景图
@@ -33,12 +34,19 @@ export default class KonvaMain {
 			this.imgLayer.draw()
 		}
 	}
+
 	// 删除方法
 	deleteCoverByName(cover) {
 		if (!cover.name) return
 		let shapeName = `.${cover.name}`
 		let shape = this.certainLayer.find(shapeName)
 		shape.each(e => e.destroy())
+		this.certainLayer.draw()
+	}
+
+	// 绘制cover
+	drawCovers(covers) {
+		forEach(covers, cover => UTILS.drawCover.call(this, cover))
 		this.certainLayer.draw()
 	}
 }

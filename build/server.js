@@ -37,6 +37,45 @@ app.get('/', (req, res) => {
 	})
 })
 
+// 准备API
+app.route('/api/v1/maps/:id')
+	.get((req, res, next) => {
+		res.json([
+			{
+				name: "1489459354540",
+				remark: "例如儿童商店一号厅",
+				type: "rect",
+				coordinate: [
+					{
+						x: 294,
+						y: 235
+					}, {
+						x: 513,
+						y: 380
+					}
+				]
+			},
+			{
+				name: "1489459361628",
+				remark: "例如儿童商",
+				type: "circular",
+				coordinate: {
+					radius: 115,
+					position: {
+						x: 626,
+						y: 333
+					}
+				}
+			},
+			{
+				name: "1489459367093",
+				remark: "童商店一号厅",
+				type: "polygon",
+				coordinate: [822, 468, 833, 530, 665, 544, 658, 490, 816, 435]
+			}
+		])
+	})
+
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`)
 })
