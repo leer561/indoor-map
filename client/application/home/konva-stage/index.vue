@@ -18,7 +18,7 @@
 			// 删除图形
 			deleteFromCovers: function (cover) {
 				this.deleteCover(cover)
-				this.konva.deleteCover(cover)
+				this.konva.deleteCoverByName(cover)
 			},
 			// 选择图形类型
 			selectCoverType: function (type) {

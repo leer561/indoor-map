@@ -33,5 +33,13 @@ export default class KonvaMain {
 			this.imgLayer.draw()
 		}
 	}
+	// 删除方法
+	deleteCoverByName(cover) {
+		if (!cover.name) return
+		let shapeName = `.${cover.name}`
+		let shape = this.certainLayer.find(shapeName)
+		shape.each(e => e.destroy())
+		this.certainLayer.draw()
+	}
 }
 

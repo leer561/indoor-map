@@ -12,13 +12,7 @@ export default class KonvaMap extends KonvaMain {
 		this.stage.add(this.moveLayer)
 
 		// 选择的图形类型
-		this.graphicType = null
-
-		// 图形备注
-		this.remark = null
-
-		// 图形起始点
-		this.pointStart = null
+		this.graphicType = this.remark = this.pointStart = null
 	}
 
 	// 监听鼠标绘制遮罩
@@ -26,44 +20,25 @@ export default class KonvaMap extends KonvaMain {
 		// 监听事件绘制图形
 		this.imgLayer.on('mousedown', () => {
 			if (!this.graphicType) return
-
 			// 根据图形类型开始绘图
-			switch (this.graphicType) {
-				case 'rect':
-					this.pointStart = this.stage.getPointerPosition()
-					this.moveShape = UTILS.generateRect(this.pointStart)
-					this.moveLayer.add(this.moveShape)
-					break
-				case 'circular':
-					this.pointStart = this.stage.getPointerPosition()
-					this.moveShape = UTILS.generateCircular(this.pointStart)
-					this.moveLayer.add(this.moveShape)
-					break
-				case 'polygon':
-					// 判断是否存在图形，存在就继续绘制
-					let currentPoint = this.stage.getPointerPosition()
-					if (this.moveShape) {
-						let point = this.moveShape.points()
-						// 判断是否靠近坐标点
-						if (UTILS.checkClosed(this.pointStart, currentPoint) && point.length > 5) {
-							this.moveShape.closed(true)
-							UTILS.output.call(this, vue, point)
-							let shape = this.moveShape.clone()
-							UTILS.completeDrawing.call(this, shape)
-							// 防止条件判断击穿
-							return
-						} else {
-							this.moveShape.points(point.concat(_.values(currentPoint)))
-							this.moveLayer.draw()
-						}
-					} else {
-						this.moveShape = UTILS.generateLine(_.values(currentPoint))
-						this.moveLayer.add(this.moveShape)
-						// 多边形多次点击 起点记录需要判断
-						this.pointStart = currentPoint
-					}
-
-					break
+			if (this.moveShape && this.graphicType === 'polygon') {
+				let currentPoint = this.stage.getPointerPosition()
+				let point = this.moveShape.points()
+				// 判断是否靠近坐标点
+				if (UTILS.checkClosed(this.pointStart, currentPoint) && point.length > 5) {
+					this.moveShape.closed(true)
+					UTILS.output.call(this, vue, point)
+					let shape = this.moveShape.clone()
+					UTILS.completeDrawing.call(this, shape)
+					// 防止条件判断击穿
+					return
+				} else {
+					this.moveShape.points(point.concat(_.values(currentPoint)))
+					this.moveLayer.draw()
+				}
+			} else {
+				// 第一次绘制图形
+				UTILS.drawGraphic.call(this)
 			}
 
 			// 多边形不需要鼠标悬停
@@ -112,15 +87,6 @@ export default class KonvaMap extends KonvaMain {
 			vue.selectType(null)
 			UTILS.cancle.call(this)
 		})
-	}
-
-	// 删除方法
-	deleteCover(cover) {
-		if (!cover.name) return
-		let shapeName = `.${cover.name}`
-		let shape = this.certainLayer.find(shapeName)
-		shape.each(e => e.destroy())
-		this.certainLayer.draw()
 	}
 }
 

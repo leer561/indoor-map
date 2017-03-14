@@ -24,8 +24,8 @@ export const generateRect = point => {
 		y: point.y,
 		width: 1,
 		height: 1,
-		fill: 'green',
-		stroke: 'black',
+		fill: '#8fcf00',
+		stroke: '#333',
 		strokeWidth: 1,
 		name: String(new Date().getTime())
 	})
@@ -37,23 +37,38 @@ export const generateCircular = point => {
 		x: point.x,
 		y: point.y,
 		radius: 1,
-		fill: 'red',
-		stroke: 'black',
+		fill: '#ee7c5d',
+		stroke: '#333',
 		strokeWidth: 1,
 		name: String(new Date().getTime())
 	})
 }
 
-// 生成矩形
+// 生成多边形
 export const generateLine = point => {
 	return new Konva.Line({
 		points: point,
 		fill: '#00D2FF',
-		stroke: 'black',
+		stroke: '#333',
 		strokeWidth: 1,
 		closed: false,
 		name: String(new Date().getTime())
 	})
+}
+
+// 生成文本
+export const generateText = function () {
+	let text = new Konva.Text({
+		x: this.pointStart.x,
+		y: this.pointStart.y,
+		text: this.remark,
+		fontSize: 14,
+		fontFamily: 'Calibri',
+		fill: 'black',
+		name: this.moveShape.name()
+	})
+	text.moveToTop()
+	this.certainLayer.add(text)
 }
 
 // 输出cover
@@ -97,6 +112,7 @@ export const completeDrawing = function (shape) {
 	this.moveLayer.draw()
 
 	this.certainLayer.add(shape)
+	generateText.call(this)
 	this.certainLayer.draw()
 	this.graphicType = this.pointStart = this.moveShape = null
 }
@@ -112,3 +128,21 @@ export const cancle = function () {
 	this.graphicType = this.pointStart = this.moveShape = null
 	this.moveLayer.draw()
 }
+
+// 绘制总入口
+export const drawGraphic = function () {
+	let currentPoint = this.stage.getPointerPosition()
+	this.pointStart = currentPoint
+	switch (this.graphicType) {
+		case 'rect':
+			this.moveShape = generateRect(currentPoint)
+			break
+		case 'circular':
+			this.moveShape = generateCircular(currentPoint)
+			break
+		case 'polygon':
+			this.moveShape = generateLine(_.values(currentPoint))
+	}
+	this.moveLayer.add(this.moveShape)
+}
+
