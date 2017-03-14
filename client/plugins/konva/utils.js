@@ -67,7 +67,6 @@ export const generateText = function () {
 		fill: 'black',
 		name: this.moveShape.name()
 	})
-	text.moveToTop()
 	this.certainLayer.add(text)
 }
 
