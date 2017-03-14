@@ -1,9 +1,9 @@
 <script>
-    import konvaStage from './konva-stage'
+	import konvaStage from './konva-stage'
 	export default {
-    	components:{
-    		konvaStage
-        }
+		components:{
+			konvaStage
+		}
 	}
 </script>
 
@@ -12,7 +12,3 @@
         <konva-stage></konva-stage>
     </div>
 </template>
-
-<style lang="sass">
-    @import "./index.scss"
-</style>
