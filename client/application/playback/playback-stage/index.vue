@@ -1,5 +1,5 @@
 <script>
-	import Konva from '../../../plugins/konva/main'
+	import Konva from '../../../plugins/konva/playback'
 	export default {
 		data: () => {
 			return {
@@ -16,6 +16,11 @@
 				let covers = res.body
 				if (!covers.length) return
 				konva.drawCovers(covers)
+			})
+			this.$http.get('/api/v1/tracks/1').then(res => {
+				let tracks = res.body
+				if (!tracks.length) return
+				konva.drawTracks(tracks)
 			})
 		},
 		methods: {

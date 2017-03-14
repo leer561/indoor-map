@@ -76,6 +76,11 @@ app.route('/api/v1/maps/:id')
 		])
 	})
 
+app.route('/api/v1/tracks/:id')
+	.get((req, res, next) => {
+		res.json([5, 70, 140, 23, 250, 60, 300, 20, 60, 76, 22, 66, 123, 34])
+	})
+
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`)
 })
