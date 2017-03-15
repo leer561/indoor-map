@@ -1,0 +1,9 @@
+#real-time-stage.row
+    .col-10
+        #konva-stage
+    .col-2
+        .toolbar
+            h5 工具栏
+            ul.list-unstyled
+                li(v-on:click="showCover(true)" v-bind:class="{ active: show==true }") 显示
+                li(v-on:click="showCover(false)" v-bind:class="{ active: show==false }") 隐藏
