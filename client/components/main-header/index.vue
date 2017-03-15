@@ -7,7 +7,8 @@
                 title:'demo',
                 nav:[
                     {text:'home', value:'home'},
-					{text:'playback', value:'playback'}
+					{text:'playback', value:'playback'},
+					{text:'real-time', value:'real-time'}
                 ],
                 currentRouter:'#home'
             }

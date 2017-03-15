@@ -4,6 +4,7 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
+var _ = require('lodash')
 
 const app = express()
 
@@ -75,10 +76,17 @@ app.route('/api/v1/maps/:id')
 			}
 		])
 	})
-
+// 轨迹点
 app.route('/api/v1/tracks/:id')
 	.get((req, res, next) => {
 		res.json([5, 70, 140, 23, 250, 60, 300, 20, 60, 76, 22, 66, 123, 34])
+	})
+// 实时数据点
+app.route('/api/v1/realTime')
+	.get((req, res, next) => {
+		res.json(Array.from({length: 30}, () => {
+			return {x: _.random(50, 1200), y: _.random(50, 1200)}
+		}))
 	})
 
 app.listen(port, () => {

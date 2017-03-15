@@ -7,7 +7,6 @@ export default class KonvaPlayBack extends KonvaMain {
 	constructor() {
 		super()
 		// 添加临时矩形与绘图层
-		this.trackShape = null
 		this.trackLayer = new Konva.Layer()
 		this.stage.add(this.trackLayer)
 	}
