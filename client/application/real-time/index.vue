@@ -1,8 +1,7 @@
-
 <script>
 	import realTimeStage from './real-time-stage'
 	export default {
-		components:{
+		components: {
 			realTimeStage
 		}
 	}

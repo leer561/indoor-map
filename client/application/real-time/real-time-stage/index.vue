@@ -37,11 +37,11 @@
 		},
 
 		//组件销毁
-		beforeDestory(){
+		destroyed(){
 			if (this.showPointsInterval) {
 				clearInterval(this.showPointsInterval)
 			}
-		}
+        }
 
 	}
 </script>
