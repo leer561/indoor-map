@@ -5,7 +5,9 @@
 				maps: [],
 				tracks: [],
 				selectedMap: {},
-				selectedTrack: []
+				selectedTrack: [],
+				startTime: null,
+				endTime: null
 			}
 		},
 		mounted(){
@@ -24,7 +26,7 @@
 			},
 			...Vuex.mapActions('playback', [
 				'selectTrack',
-                'selectMap'
+				'selectMap'
 			])
 		}
 	}

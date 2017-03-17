@@ -4,6 +4,13 @@
             label.form-control-label 选择地图
             select.form-control(v-model="selectedMap" v-on:change="getTracks(selectedMap)")
                 option(v-for="map in maps" v-bind:value="map") {{map.name}}
+        .form-group
+            label.form-control-label 起始时间
+            input.form-control( type="datetime-local" v-model="startTime")
+
+        .form-group
+            label.form-control-label 结束时间
+            input.form-control( type="datetime-local" v-model="endTime")
 
         .form-group
             label.form-control-label 选择轨迹
