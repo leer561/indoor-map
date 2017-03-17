@@ -16,6 +16,20 @@
 				this.show = data
 				this.konva.showCover(data)
 			}
+		},
+		computed: Vuex.mapState('playback', [
+			'selectedMap',
+            'selectedTrack'
+		]),
+		watch: {
+			selectedMap: function (map) {
+				if(!map.id) return
+				this.konva.drawCovers(map.covers)
+			},
+			selectedTrack: function (track) {
+				if(!track.id) return
+				this.konva.drawTracks(track.tracks)
+			}
 		}
 
 	}

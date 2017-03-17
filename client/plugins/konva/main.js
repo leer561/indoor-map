@@ -12,7 +12,7 @@ export default class KonvaMain {
 		this.stage.add(this.imgLayer)
 
 		// 添加遮罩图层
-		this.certainLayer = new Konva.Layer({opacity: 0.5})
+		this.certainLayer = new Konva.Layer({opacity: 0.7})
 		this.stage.add(this.certainLayer)
 	}
 
@@ -46,12 +46,18 @@ export default class KonvaMain {
 
 	// 绘制cover
 	drawCovers(covers) {
+		if (this.certainLayer) {
+			this.certainLayer.destroy()
+			this.certainLayer = null
+			this.certainLayer = new Konva.Layer({opacity: 0.7})
+			this.stage.add(this.certainLayer)
+		}
 		forEach(covers, cover => UTILS.drawCover.call(this, cover))
 		this.certainLayer.draw()
 	}
 
 	// 显示或者隐藏遮罩层
-	showCover(data){
+	showCover(data) {
 		this.certainLayer.visible(data)
 	}
 }
