@@ -4,11 +4,13 @@ import Vuex from 'vuex'
 
 // pages and plugin Vuex
 import home from '../application/home/vuex'
+import playback from '../application/playback/vuex'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
 	modules: {
-		home
+		home,
+		playback
 	},
 	plugins: [createLogger()]
 })
