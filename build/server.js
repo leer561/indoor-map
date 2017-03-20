@@ -49,10 +49,9 @@ app.route('/api/v1/maps/:id')
 		res.json(MOCKDATA.MAPS[0])
 	})
 // 轨迹点
-app.route('/api/v1/tracks/:mapId')
-	.get((req, res, next) => {
-		res.json(MOCKDATA.TRACKS)
-	})
+app.get('/api/v1/tracks', (req, res, next) => {
+	res.json(MOCKDATA.TRACKS)
+})
 // 实时数据点
 app.route('/api/v1/realTime')
 	.get((req, res, next) => {

@@ -2,7 +2,7 @@
     form.form-inline
         .form-group
             label.form-control-label 选择地图
-            select.form-control(v-model="selectedMap" v-on:change="getTracks(selectedMap)")
+            select.form-control(v-model="selectedMap" v-on:change="selectMap(selectedMap)")
                 option(v-for="map in maps" v-bind:value="map") {{map.name}}
         .form-group
             label.form-control-label 起始时间
@@ -12,7 +12,12 @@
             label.form-control-label 结束时间
             input.form-control( type="datetime-local" v-model="endTime")
 
+
         .form-group
+            button.btn.btn-primary(type="submit" v-on:click="getTracks()") 查询
+
+    #result.row.form-inline(v-if="!isLoading")
+        .form-group.col-4
             label.form-control-label 选择轨迹
             select.form-control(v-model="selectedTrack" v-on:change="selectTrack(selectedTrack)")
                 option(v-for="track in tracks" v-bind:value="track") {{track.name}}

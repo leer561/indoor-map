@@ -7,7 +7,8 @@
 				selectedMap: {},
 				selectedTrack: [],
 				startTime: null,
-				endTime: null
+				endTime: null,
+				isLoading: true
 			}
 		},
 		mounted(){
@@ -15,13 +16,20 @@
 			this.$http.get('/api/v1/maps').then(res => this.maps.push(...res.body))
 		},
 		methods: {
-			getTracks: function (map) {
-				this.selectMap(map)
-				this.$http.get(`/api/v1/tracks/${map.id}`).then(res => {
+			getTracks: function () {
+				this.isLoading = true
+				this.$http.get('/api/v1/tracks', {
+					params: {
+						startTime: new Date(this.startTime).getTime(),
+						mapId: this.selectedMap.id,
+						endTime: new Date(this.endTime).getTime()
+					}
+				}).then(res => {
 					if (this.tracks.length) {
 						this.tracks.splice(0, this.tracks.length)
 					}
 					this.tracks.push(...res.body)
+					this.isLoading = false
 				})
 			},
 			...Vuex.mapActions('playback', [
