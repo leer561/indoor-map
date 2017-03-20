@@ -21,6 +21,13 @@ export default class KonvaMain {
 		let imageObj = new Image()
 		imageObj.src = img
 
+		if (this.imgLayer) {
+			this.imgLayer.destroy()
+			this.imgLayer = null
+			this.imgLayer = new Konva.Layer()
+			this.stage.add(this.imgLayer)
+		}
+
 		imageObj.onload = () => {
 			let yoda = new Konva.Image({
 				x: 0,

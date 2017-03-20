@@ -7,9 +7,8 @@
 		// 实例挂载后的生命周期，不保证组件已在document中
 		mounted(){
 			let konva = new Konva()
-			konva.addBackGroundImg()
-			konva.bindEvents(this)
 			this.konva = konva
+			this.konva.bindEvents(this)
 		},
 		methods: {
 			// 删除图形
@@ -37,6 +36,7 @@
 		watch: {
 			selectedMap: function (map) {
 				if (!map.id) return
+				this.konva.addBackGroundImg(map.background)
 				this.konva.drawCovers(map.covers)
 				this.clearCovers()
 				forEach(cover => this.outputCover(cover), map.covers)
