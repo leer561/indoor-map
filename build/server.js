@@ -4,6 +4,7 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
+const MOCKDATA = require('./mockData')
 var _ = require('lodash')
 
 const app = express()
@@ -39,48 +40,18 @@ app.get('/', (req, res) => {
 })
 
 // 准备API
+app.route('/api/v1/maps')
+	.get((req, res, next) => {
+		res.json(MOCKDATA.MAPS)
+	})
 app.route('/api/v1/maps/:id')
 	.get((req, res, next) => {
-		res.json([
-			{
-				name: "1489459354540",
-				remark: "例如儿童商店一号厅",
-				type: "rect",
-				coordinate: [
-					{
-						x: 294,
-						y: 235
-					}, {
-						x: 513,
-						y: 380
-					}
-				]
-			},
-			{
-				name: "1489459361628",
-				remark: "例如儿童商",
-				type: "circular",
-				coordinate: {
-					radius: 115,
-					position: {
-						x: 626,
-						y: 333
-					}
-				}
-			},
-			{
-				name: "1489459367093",
-				remark: "童商店一号厅",
-				type: "polygon",
-				coordinate: [822, 468, 833, 530, 665, 544, 658, 490, 816, 435]
-			}
-		])
+		res.json(MOCKDATA.MAPS[0])
 	})
 // 轨迹点
-app.route('/api/v1/tracks/:id')
-	.get((req, res, next) => {
-		res.json([5, 70, 140, 23, 250, 60, 300, 20, 60, 76, 22, 66, 123, 34])
-	})
+app.get('/api/v1/tracks', (req, res, next) => {
+	res.json(MOCKDATA.TRACKS)
+})
 // 实时数据点
 app.route('/api/v1/realTime')
 	.get((req, res, next) => {

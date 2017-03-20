@@ -21,6 +21,12 @@ export default class KonvaPlayBack extends KonvaMain {
 			lineJoin: 'round',
 			dash: [29, 20, 0.001, 20]
 		})
+		if (this.trackLayer) {
+			this.trackLayer.destroy()
+			this.trackLayer = null
+			this.trackLayer = new Konva.Layer()
+			this.stage.add(this.trackLayer)
+		}
 		this.trackLayer.add(line)
 		this.trackLayer.draw()
 	}
