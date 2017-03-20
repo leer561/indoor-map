@@ -8,7 +8,6 @@
 		},
 		mounted(){
 			let konva = new Konva()
-			konva.addBackGroundImg()
 			this.konva = konva
 		},
 		methods: {
@@ -24,6 +23,7 @@
 		watch: {
 			selectedMap: function (map) {
 				if(!map.id) return
+				this.konva.addBackGroundImg(map.background)
 				this.konva.drawCovers(map.covers)
 			},
 			selectedTrack: function (track) {
