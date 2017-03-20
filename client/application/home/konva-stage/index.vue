@@ -8,7 +8,6 @@
 		mounted(){
 			let konva = new Konva()
 			this.konva = konva
-			this.konva.bindEvents(this)
 		},
 		methods: {
 			// 删除图形
@@ -37,6 +36,7 @@
 			selectedMap: function (map) {
 				if (!map.id) return
 				this.konva.addBackGroundImg(map.background)
+				this.konva.bindEvents(this)
 				this.konva.drawCovers(map.covers)
 				this.clearCovers()
 				forEach(cover => this.outputCover(cover), map.covers)
