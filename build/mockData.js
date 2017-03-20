@@ -2,7 +2,7 @@ module.exports.MAPS = [
 	{
 		id: 1,
 		name: '万达一号楼',
-		background: '', //背景图片暂时空
+		background: '/img/background.jpg', //背景图片暂时空
 		covers: [
 			{
 				name: "1489459354540",
@@ -41,7 +41,7 @@ module.exports.MAPS = [
 	{
 		id: 2,
 		name: '万达二号楼',
-		background: '', //背景图片暂时空
+		background: '/img/background2.jpg', //背景图片暂时空
 		covers: [
 			{
 				name: "1489459354540",
