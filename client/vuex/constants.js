@@ -7,6 +7,16 @@ export const OUTPUT_COVER = 'OUTPUT_COVER'
 export const CLEAR_GRAPH = 'CLEAR_GRAPH'
 // 删除选中的cover
 export const DELETE_COVER = 'DELETE_COVER'
+// 显示删除菜单
+export const SHOW_DELETE= 'SHOW_DELETE'
+// 删除COVERS数组
+export const CLEAR_COVERS= 'CLEAR_COVERS'
+
+
+// 选择某个地图
+export const SELECT_MAP = 'SELECT_MAP'
+// 选择某个轨迹
+export const SELECT_TRACK = 'SELECT_TRACK'
 
 // 键盘的回车键与取消键对应的编码
 export const ENTER_KEY = 13

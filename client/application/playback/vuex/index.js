@@ -1,8 +1,6 @@
 const state = {
-	covers: [],
-	selectedType: null,
-	showDelete:null,
-	selectedMap:null
+	selectedMap: {},
+	selectedTrack: []
 }
 
 import mutations from './mutations'

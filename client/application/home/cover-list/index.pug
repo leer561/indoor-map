@@ -1,12 +1,13 @@
 #cover-list
     h5 标记列表
+        span.fa.fa-window-close(v-on:click="showDelete(null)")
     table.table
         tr
             th 名称
             th 图形
             th 操作
         tr(v-for="cover in covers")
-            td {{cover.name}}
+            td {{cover.remark}}
             td {{cover.type}}
             td
                 span.badge.badge-danger(v-on:click="deleteCover(cover)") 删除

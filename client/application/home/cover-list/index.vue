@@ -6,7 +6,10 @@
 		methods: {
 			deleteCover: function (cover) {
 				this.$emit('delete', cover)
-			}
+			},
+            ...Vuex.mapActions('home',[
+            	'showDelete'
+            ])
 		}
 	}
 </script>

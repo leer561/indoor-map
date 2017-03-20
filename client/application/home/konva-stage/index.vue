@@ -1,4 +1,5 @@
 <script>
+	import forEach from 'lodash/fp/forEach'
 	import Konva from '../../../plugins/konva/konva-map'
 	import coverList from '../cover-list'
 	import coverType from '../cover-type'
@@ -6,19 +7,14 @@
 		// 实例挂载后的生命周期，不保证组件已在document中
 		mounted(){
 			let konva = new Konva()
-			konva.addBackGroundImg()
-			konva.bindEvents(this)
 			this.konva = konva
-		},
-		// 销毁先动作
-		beforeDestory(){
-
+			this.konva.bindEvents(this)
 		},
 		methods: {
 			// 删除图形
 			deleteFromCovers: function (cover) {
 				this.deleteCover(cover)
-				this.konva.deleteCover(cover)
+				this.konva.deleteCoverByName(cover)
 			},
 			// 选择图形类型
 			selectCoverType: function (type) {
@@ -29,8 +25,22 @@
 			...Vuex.mapActions('home', [
 				'outputCover',
 				'deleteCover',
-				'selectType'
+				'selectType',
+                'clearCovers'
 			])
+		},
+		computed: Vuex.mapState('home', [
+			'showDelete',
+			'selectedMap'
+		]),
+		watch: {
+			selectedMap: function (map) {
+				if (!map.id) return
+				this.konva.addBackGroundImg(map.background)
+				this.konva.drawCovers(map.covers)
+				this.clearCovers()
+				forEach(cover => this.outputCover(cover), map.covers)
+			}
 		},
 		components: {
 			coverList,
@@ -44,7 +54,7 @@
     <div class="row">
         <div class="col-10">
             <div id="konva-stage"></div>
-            <cover-list v-on:delete='deleteFromCovers'></cover-list>
+            <cover-list v-on:delete='deleteFromCovers' v-if="showDelete"></cover-list>
         </div>
         <div class="col-2">
             <cover-type v-on:selectType='selectCoverType'></cover-type>
