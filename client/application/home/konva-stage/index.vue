@@ -1,4 +1,5 @@
 <script>
+	import forEach from 'lodash/fp/forEach'
 	import Konva from '../../../plugins/konva/konva-map'
 	import coverList from '../cover-list'
 	import coverType from '../cover-type'
@@ -9,10 +10,6 @@
 			konva.addBackGroundImg()
 			konva.bindEvents(this)
 			this.konva = konva
-		},
-		// 销毁先动作
-		beforeDestory(){
-
 		},
 		methods: {
 			// 删除图形
@@ -29,12 +26,22 @@
 			...Vuex.mapActions('home', [
 				'outputCover',
 				'deleteCover',
-				'selectType'
+				'selectType',
+                'clearCovers'
 			])
 		},
 		computed: Vuex.mapState('home', [
-			'showDelete'
+			'showDelete',
+			'selectedMap'
 		]),
+		watch: {
+			selectedMap: function (map) {
+				if (!map.id) return
+				this.konva.drawCovers(map.covers)
+				this.clearCovers()
+				forEach(cover => this.outputCover(cover), map.covers)
+			}
+		},
 		components: {
 			coverList,
 			coverType

@@ -9,6 +9,9 @@ export const CLEAR_GRAPH = 'CLEAR_GRAPH'
 export const DELETE_COVER = 'DELETE_COVER'
 // 显示删除菜单
 export const SHOW_DELETE= 'SHOW_DELETE'
+// 删除COVERS数组
+export const CLEAR_COVERS= 'CLEAR_COVERS'
+
 
 // 选择某个地图
 export const SELECT_MAP = 'SELECT_MAP'

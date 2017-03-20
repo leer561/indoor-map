@@ -1,0 +1,6 @@
+#stage-image
+    form.form-inline
+        .form-group
+            label.form-control-label 选择底图
+            select.form-control(v-model="selectedMap" v-on:change="selectMap(selectedMap)")
+                option(v-for="map in maps" v-bind:value="map") {{map.name}}
