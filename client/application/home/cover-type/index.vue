@@ -3,7 +3,7 @@
 	export default {
 		data: () => {
 			return {
-				types: {矩形: 'rect', 圆形: 'circular', 多边形: 'polygon'}
+				types: {矩形: 'rect', 圆形: 'circle', 多边形: 'polygon'}
 			}
 		},
 		methods: {
