@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const base = require('./webpack.base')
 const config = require('./config')
+const fp = require('lodash/fp')
 
 if (config.electron) {
 	// remove dist folder in electron mode
@@ -15,8 +16,10 @@ if (config.electron) {
 	base.devtool = 'source-map'
 }
 
+// set vendor jquery first
+let vendor = fp.reject(item => item === 'jquery' || item === 'bootstrap')(config.vendor)
 // a white list to add dependencies to vendor chunk
-base.entry.vendor = config.vendor
+base.entry.vendor = vendor
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
 // add webpack plugins
