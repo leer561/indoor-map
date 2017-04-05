@@ -18,6 +18,7 @@ if (config.electron) {
 
 // set vendor jquery first
 let vendor = fp.reject(item => item === 'jquery' || item === 'bootstrap')(config.vendor)
+vendor.unshift('Golo')
 // a white list to add dependencies to vendor chunk
 base.entry.vendor = vendor
 // use hash filename to support long-term caching

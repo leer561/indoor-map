@@ -16,7 +16,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.vue', '.css', '.json', '.scss'],
 		alias: {
-			vue: 'vue/dist/vue.js'
+			vue: 'vue/dist/vue.js',
+			Golo: path.join(__dirname, '../client/custom-vendor/mqtt.js')
 		}
 	},
 	module: {
@@ -52,7 +53,8 @@ module.exports = {
 			Vue: 'vue',
 			Vuex: 'vuex',
 			$: 'jquery',
-			_: 'lodash'
+			_: 'lodash',
+			Golo: 'Golo'
 		}),
 		new HtmlWebpackPlugin({
 			title: config.title,
