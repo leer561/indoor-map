@@ -93,7 +93,7 @@ export const output = function (vue, point) {
 				name: this.moveShape.name()
 			})
 			break
-		case 'circular':
+		case 'circle':
 			vue.outputCover({
 				type: this.graphicType,
 				coordinate: {
@@ -147,7 +147,7 @@ export const drawGraphic = function () {
 		case 'rect':
 			this.moveShape = generateRect(currentPoint)
 			break
-		case 'circular':
+		case 'circle':
 			this.moveShape = generateCircular(currentPoint)
 			break
 		case 'polygon':
@@ -165,7 +165,7 @@ export const drawCover = function (cover) {
 			shape = generateRect(cover.coordinate[0], getSize(cover.coordinate[0], cover.coordinate[1]))
 			textPoint = cover.coordinate[0]
 			break
-		case 'circular':
+		case 'circle':
 			shape = generateCircular(cover.coordinate.position, cover.coordinate.radius)
 			textPoint = cover.coordinate.position
 			break

@@ -18,6 +18,10 @@ export const SELECT_MAP = 'SELECT_MAP'
 // 选择某个轨迹
 export const SELECT_TRACK = 'SELECT_TRACK'
 
+// mqtt 实时消息
+// 接收数据
+export const RECEIVE = 'RECEIVE'
+
 // 键盘的回车键与取消键对应的编码
 export const ENTER_KEY = 13
 export const ESCAPE_KEY = 27

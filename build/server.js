@@ -53,7 +53,7 @@ app.get('/api/v1/tracks', (req, res, next) => {
 	res.json(MOCKDATA.TRACKS)
 })
 // 实时数据点
-app.route('/api/v1/realTime')
+app.route('/api/v1/realTime/:id')
 	.get((req, res, next) => {
 		res.json(Array.from({length: 30}, () => {
 			return {x: _.random(50, 1200), y: _.random(50, 1200)}

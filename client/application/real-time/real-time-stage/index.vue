@@ -8,19 +8,7 @@
 		},
 		mounted(){
 			let konva = new Konva()
-			konva.addBackGroundImg()
 			this.konva = konva
-
-			// 请求数据
-			this.$http.get('/api/v1/maps/1').then(res => {
-				let covers = res.body
-				if (!covers.length) return
-				konva.drawCovers(covers)
-			})
-
-			// 获取实时数据
-			this.showPoints()
-			this.showPointsInterval = setInterval(this.showPoints, 5000)
 		},
 		methods: {
 			showCover: function (data) {
@@ -28,11 +16,24 @@
 				this.konva.showCover(data)
 			},
 			showPoints: function () {
-				this.$http.get('/api/v1/realTime').then(res => {
+				this.$http.get(`/api/v1/realTime/${this.selectedMap.id}`).then(res => {
 					let points = res.body
 					if (!points.length) return
 					this.konva.drawPoints(points)
 				})
+			}
+		},
+		computed: Vuex.mapState('realTime', [
+			'selectedMap'
+		]),
+		watch: {
+			selectedMap: function (map) {
+				if (!map.id) return
+				this.konva.addBackGroundImg(map.background)
+				this.konva.drawCovers(map.covers)
+				// 获取实时数据
+				this.showPoints()
+				this.showPointsInterval = setInterval(this.showPoints, 5000)
 			}
 		},
 

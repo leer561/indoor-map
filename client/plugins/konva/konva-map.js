@@ -51,7 +51,7 @@ export default class KonvaMap extends KonvaMain {
 				if (this.graphicType === 'rect') {
 					this.moveShape.size(UTILS.getSize(this.pointStart, this.stage.getPointerPosition()))
 				}
-				if (this.graphicType === 'circular') {
+				if (this.graphicType === 'circle') {
 					this.moveShape.radius(UTILS.getRadius(this.pointStart, this.stage.getPointerPosition()))
 				}
 				this.moveLayer.draw()
@@ -72,7 +72,7 @@ export default class KonvaMap extends KonvaMain {
 					shape.size(UTILS.getSize(this.pointStart, pointEnd))
 					UTILS.output.call(this, vue, pointEnd)
 					break
-				case 'circular':
+				case 'circle':
 					shape.radius(UTILS.getRadius(this.pointStart, pointEnd))
 					UTILS.output.call(this, vue, UTILS.getRadius(this.pointStart, pointEnd))
 					break
