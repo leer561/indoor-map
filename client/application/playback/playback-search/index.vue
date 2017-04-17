@@ -13,12 +13,12 @@
 		},
 		mounted(){
 			// 请求数据
-			this.$http.get('/api/v1/maps').then(res => this.maps.push(...res.body))
+			this.$http.get('/api/maps').then(res => this.maps.push(...res.body))
 		},
 		methods: {
 			getTracks: function () {
 				this.isLoading = true
-				this.$http.get('/api/v1/tracks', {
+				this.$http.get('/api/tracks', {
 					params: {
 						startTime: new Date(this.startTime).getTime(),
 						mapId: this.selectedMap.id,

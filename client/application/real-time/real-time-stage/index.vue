@@ -16,7 +16,7 @@
 				this.konva.showCover(data)
 			},
 			showPoints: function () {
-				this.$http.get(`/api/v1/realTime/${this.selectedMap.id}`).then(res => {
+				this.$http.get(`/api/realTime/${this.selectedMap.id}`).then(res => {
 					let points = res.body
 					if (!points.length) return
 					this.konva.drawPoints(points)
