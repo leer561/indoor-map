@@ -14,10 +14,11 @@
 				let tempMap = merge({}, this.selectedMap, {covers: this.covers})
 				delete tempMap.covers
 				merge(tempMap, {covers: this.covers})
-				this.$http.put(`/api/v1/maps/${tempMap.id}`, tempMap)
+				this.$http.put(`/api/maps/${tempMap.id}`, tempMap).then(data => this.updateMap(data.body))
 			},
 			...Vuex.mapActions('home', [
-				'showDelete'
+				'showDelete',
+                'updateMap'
 			])
 		},
 		computed: Vuex.mapState('home', [

@@ -2,19 +2,22 @@
 	export default {
 		data: () => {
 			return {
-				maps: [],
 				selectedMap: {}
 			}
 		},
 		mounted(){
 			// 请求数据
-			this.$http.get('/api/maps').then(res => this.maps.push(...res.body))
+			this.$http.get('/api/maps').then(res => this.getMaps(res.body))
 		},
 		methods: {
 			...Vuex.mapActions('home', [
-				'selectMap'
+				'selectMap',
+                'getMaps'
 			])
-		}
+		},
+		computed: Vuex.mapState('home', [
+			'maps'
+		])
 	}
 </script>
 <template lang="pug" src="./index.pug"></template>

@@ -6,5 +6,7 @@ export default {
 	'selectType': ({commit}, type) => commit(TYPES.SELECT_TYPE, type),
 	'showDelete': ({commit}, data) => commit(TYPES.SHOW_DELETE, data),
 	'selectMap': ({commit}, map) => commit(TYPES.SELECT_MAP, map),
-	'clearCovers': ({commit}) => commit(TYPES.CLEAR_COVERS)
+	'clearCovers': ({commit}) => commit(TYPES.CLEAR_COVERS),
+	'updateMap': ({commit}, map) => commit(TYPES.UPDATE_MAP, map),
+	'getMaps':({commit}, maps) => commit(TYPES.GET_MAPS, maps)
 }
