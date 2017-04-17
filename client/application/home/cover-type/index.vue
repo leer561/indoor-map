@@ -14,7 +14,7 @@
 				let tempMap = merge({}, this.selectedMap, {covers: this.covers})
 				delete tempMap.covers
 				merge(tempMap, {covers: this.covers})
-				this.$http.put(`/api/maps/${tempMap.id}`, tempMap).then(data => this.updateMap(data.body))
+				this.$http.put(`/weidian/api/maps/${tempMap.id}`, tempMap).then(data => this.updateMap(data.body))
 			},
 			...Vuex.mapActions('home', [
 				'showDelete',

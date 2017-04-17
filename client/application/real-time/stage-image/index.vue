@@ -8,7 +8,7 @@
 		},
 		mounted(){
 			// 请求数据
-			this.$http.get('/api/maps').then(res => this.maps.push(...res.body))
+			this.$http.get('/weidian/api/maps').then(res => this.maps.push(...res.body))
 		},
 		methods: {
 			...Vuex.mapActions('realTime', [

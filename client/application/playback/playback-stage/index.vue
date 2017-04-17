@@ -27,7 +27,6 @@
 				this.konva.drawCovers(map.covers)
 			},
 			selectedTrack: function (track) {
-				if(!track.id) return
 				this.konva.drawTracks(track.tracks)
 			}
 		}
