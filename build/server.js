@@ -39,9 +39,11 @@ app.get('/', (req, res) => {
 	})
 })
 
-// 设置求请转发
-const apiProxy = proxy('/api/**', {target: 'http://192.168.1.12:3000/weidian', changeOrigin: true})
-app.use('/api', apiProxy)
+// // 设置求请转发
+const apiProxy1 = proxy('/weidian/**', {target: 'http://192.168.1.12:3000', changeOrigin: true})
+app.use('/weidian', apiProxy1)
+const apiProxy2 = proxy('/api/**', {target: 'http://192.168.1.12:3000', changeOrigin: true})
+app.use('/api', apiProxy2)
 
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`)
