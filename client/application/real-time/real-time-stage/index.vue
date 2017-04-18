@@ -14,35 +14,24 @@
 			showCover: function (data) {
 				this.show = data
 				this.konva.showCover(data)
-			},
-			showPoints: function () {
-				this.$http.get(`/api/realTime/${this.selectedMap.id}`).then(res => {
-					let points = res.body
-					if (!points.length) return
-					this.konva.drawPoints(points)
-				})
 			}
 		},
-		computed: Vuex.mapState('realTime', [
-			'selectedMap'
-		]),
+		computed: {
+			...Vuex.mapState('realTime', ['selectedMap']),
+			...Vuex.mapState('dataExpress', ['dart'])
+		},
 		watch: {
 			selectedMap: function (map) {
 				if (!map.id) return
 				this.konva.addBackGroundImg(map.background)
 				this.konva.drawCovers(map.covers)
 				// 获取实时数据
-				this.showPoints()
-				this.showPointsInterval = setInterval(this.showPoints, 5000)
+				this.konva.drawPoints(this.points)
+			},
+			dart: function () {
+				this.konva.drawPoints(this.points)
 			}
-		},
-
-		//组件销毁
-		destroyed(){
-			if (this.showPointsInterval) {
-				clearInterval(this.showPointsInterval)
-			}
-        }
+		}
 
 	}
 </script>
