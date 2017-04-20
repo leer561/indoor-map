@@ -1,10 +1,19 @@
 import * as TYPES from '../../vuex/constants'
 import decode from './decode'
 import Conversion from './conversion'
+import isArray from 'lodash/isArray'
 
 //mutations
 const mutations = {
-	[TYPES.RECEIVE]: (state, message) => state[message.topic] = message.data
+	[TYPES.RECEIVE]: (state, message) => {
+		let oldData = state[message.topic]
+		if (oldData && isArray(oldData)) {
+			state[message.topic].splice(0, oldData.length)
+			state[message.topic].push(...message.data)
+		} else {
+			state[message.topic] = message.data
+		}
+	}
 }
 
 //actions
@@ -13,7 +22,9 @@ const actions = {
 }
 
 const store = {
-	state: {},
+	state: {
+		dart:[]
+	},
 	mutations: mutations,
 	actions: actions,
 	namespaced: true,
@@ -25,7 +36,8 @@ const plugin = function (dataExpress) {
 		dataExpress.onMessageArrived = (message) => {
 			let tempData = decode(message)
 			if (!tempData) return
-			conversion.input(message.message)
+			console.log('tempData', tempData)
+			conversion.input(tempData.message)
 			conversion.start = true
 		}
 

@@ -2,6 +2,7 @@
  * 定时获取信息，默认5秒缓存一组数据
  */
 import values from 'lodash/values'
+import {changeToPxels} from '../../vuex/change-data'
 
 class Conversion {
 	constructor(name = 'tag') {
@@ -10,7 +11,7 @@ class Conversion {
 		this.obj = {}
 	}
 	input(data){
-		this.obj[data[this.name]] = {x: data.x, y: data.y}
+		this.obj[data[this.name]] = {x: changeToPxels(data.x), y: changeToPxels(data.y)}
 	}
 	output(){
 		return values(this.obj)
