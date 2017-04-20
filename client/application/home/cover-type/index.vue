@@ -1,5 +1,6 @@
 <script>
 	import merge from 'lodash/merge'
+	import {changeData} from '../../../vuex/change-data'
 	export default {
 		data: () => {
 			return {
@@ -14,10 +15,16 @@
 				let tempMap = merge({}, this.selectedMap, {covers: this.covers})
 				delete tempMap.covers
 				merge(tempMap, {covers: this.covers})
-				this.$http.put(`/api/v1/maps/${tempMap.id}`, tempMap)
+				tempMap.covers = changeData(tempMap.covers)
+				this.$http.put(`/weidian/api/maps/${tempMap.id}`, tempMap).then(data => {
+					let map = data.body
+					map.covers = changeData(map.covers, 'Pxels')
+					this.updateMap(map)
+				})
 			},
 			...Vuex.mapActions('home', [
-				'showDelete'
+				'showDelete',
+				'updateMap'
 			])
 		},
 		computed: Vuex.mapState('home', [

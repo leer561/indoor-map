@@ -4,11 +4,11 @@
     export default{
         data: function(){
             return{
-                title:'demo',
+                title:'微店室内定位项目',
                 nav:[
-                    {text:'home', value:'home'},
-					{text:'playback', value:'playback'},
-					{text:'real-time', value:'real-time'}
+                    {text:'设置', value:'home'},
+					{text:'轨迹回放', value:'playback'},
+					{text:'实时展示', value:'real-time'}
                 ],
                 currentRouter:'#home'
             }

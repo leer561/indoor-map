@@ -1,0 +1,153 @@
+{
+  "nested": {
+    "protos": {
+      "nested": {
+        "Sample": {
+          "fields": {
+            "id": {
+              "type": "string",
+              "id": 1
+            },
+            "count": {
+              "type": "int32",
+              "id": 2
+            },
+            "float": {
+              "type": "float",
+              "id": 3
+            },
+            "bool": {
+              "type": "bool",
+              "id": 4
+            },
+            "array": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 5
+            },
+            "obj": {
+              "type": "Obj",
+              "id": 6
+            }
+          },
+          "nested": {
+            "Obj": {
+              "fields": {
+                "lat": {
+                  "type": "string",
+                  "id": 1
+                },
+                "lng": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "CarData": {
+          "fields": {
+            "id": {
+              "type": "string",
+              "id": 1
+            },
+            "time": {
+              "type": "int32",
+              "id": 2
+            },
+            "speed": {
+              "type": "int32",
+              "id": 3
+            },
+            "gps": {
+              "type": "Gps",
+              "id": 4
+            },
+            "group": {
+              "type": "string",
+              "id": 5
+            },
+            "owner": {
+              "type": "string",
+              "id": 6
+            },
+            "abc": {
+              "type": "string",
+              "id": 7
+            }
+          },
+          "nested": {
+            "Gps": {
+              "fields": {
+                "lat": {
+                  "type": "string",
+                  "id": 1
+                },
+                "lng": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "Message": {
+          "fields": {
+            "content": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "Dart": {
+          "fields": {
+            "dataheader": {
+              "type": "string",
+              "id": 1
+            },
+            "tag": {
+              "type": "string",
+              "id": 2
+            },
+            "x": {
+              "type": "string",
+              "id": 3
+            },
+            "y": {
+              "type": "string",
+              "id": 4
+            },
+            "z": {
+              "type": "string",
+              "id": 5
+            },
+            "areaid": {
+              "type": "string",
+              "id": 6
+            },
+            "areaname": {
+              "type": "string",
+              "id": 7
+            },
+            "battery": {
+              "type": "string",
+              "id": 8
+            },
+            "timestamp": {
+              "type": "int32",
+              "id": 9
+            },
+            "unit": {
+              "type": "string",
+              "id": 10
+            },
+            "source": {
+              "type": "string",
+              "id": 11
+            }
+          }
+        }
+      }
+    }
+  }
+}

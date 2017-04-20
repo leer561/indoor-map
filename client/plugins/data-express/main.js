@@ -20,6 +20,8 @@ export default class DataExpress extends Golo.MQTT.Client {
 				keepAliveInterval: Number(OPTIONS.keepAlive),
 				onSuccess: () => {
 					console.log("The client connect success.")
+					this.subscribe('dart')
+					this.subscribe('/id_1111/protos/Dart')
 					resolve('success')
 				},
 				onFailure: () => {
