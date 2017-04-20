@@ -40,9 +40,9 @@ app.get('/', (req, res) => {
 })
 
 // // 设置求请转发
-const apiProxy1 = proxy('/weidian/**', {target: 'http://192.168.1.12:3000', changeOrigin: true})
+const apiProxy1 = proxy('/weidian/**', {target: 'http://192.168.1.24:3000', changeOrigin: true})
 app.use('/weidian', apiProxy1)
-const apiProxy2 = proxy('/api/**', {target: 'http://192.168.1.12:3000', changeOrigin: true})
+const apiProxy2 = proxy('/api/**', {target: 'http://192.168.1.24:3000', changeOrigin: true})
 app.use('/api', apiProxy2)
 
 app.listen(port, () => {
