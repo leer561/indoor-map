@@ -1,6 +1,7 @@
 <script>
 	import groupBy from 'lodash/fp/groupBy'
 	import forEach from 'lodash/forEach'
+	import {changeData, changeToPxelsFunc} from '../../../vuex/change-data'
 	export default {
 		data: () => {
 			return {
@@ -15,16 +16,20 @@
 		},
 		mounted(){
 			// 请求数据
-			this.$http.get('/weidian/api/maps').then(res => this.maps.push(...res.body))
+			this.$http.get('/weidian/api/maps').then(res => {
+				let maps = res.body
+				forEach(maps, map => map.covers = changeData(map.covers, 'Pxels'))
+				this.maps.push(...maps)
+			})
 		},
 		methods: {
 			getTracks: function () {
 				this.isLoading = true
 				this.$http.get('/api/dart', {
 					params: {
-						gte: new Date(this.startTime).getTime()/1000,
+						gte: new Date(this.startTime).getTime() / 1000,
 						//mapId: this.selectedMap.id,
-						lte: new Date(this.endTime).getTime()/1000,
+						lte: new Date(this.endTime).getTime() / 1000,
 						filter: 'x,y,tag',
 						by: 'timestamp'
 					}
@@ -46,6 +51,7 @@
 							tracks: []
 						}
 						forEach(value, item => itemPoint.tracks.push(item.x, item.y))
+						itemPoint.tracks = changeToPxelsFunc(itemPoint.tracks)
 						this.tracks.push(itemPoint)
 					})
 					this.isLoading = false

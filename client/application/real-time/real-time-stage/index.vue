@@ -25,11 +25,9 @@
 				if (!map.id) return
 				this.konva.addBackGroundImg(map.background)
 				this.konva.drawCovers(map.covers)
-				// 获取实时数据
-				this.konva.drawPoints(this.points)
 			},
-			dart: function () {
-				this.konva.drawPoints(this.points)
+			dart: function (points) {
+				this.konva.drawPoints(points)
 			}
 		}
 

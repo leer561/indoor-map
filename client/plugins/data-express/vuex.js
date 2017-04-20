@@ -1,19 +1,10 @@
 import * as TYPES from '../../vuex/constants'
 import decode from './decode'
 import Conversion from './conversion'
-import isArray from 'lodash/isArray'
 
 //mutations
 const mutations = {
-	[TYPES.RECEIVE]: (state, message) => {
-		let oldData = state[message.topic]
-		if (oldData && isArray(oldData)) {
-			state[message.topic].splice(0, oldData.length)
-			state[message.topic].push(...message.data)
-		} else {
-			state[message.topic] = message.data
-		}
-	}
+	[TYPES.RECEIVE]: (state, message) => state[message.topic] = message.data
 }
 
 //actions
