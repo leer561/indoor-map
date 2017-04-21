@@ -13,10 +13,15 @@ export const SHOW_DELETE= 'SHOW_DELETE'
 export const CLEAR_COVERS= 'CLEAR_COVERS'
 
 
+// 获取地图信息
+export const GET_MAPS = 'GET_MAPS'
 // 选择某个地图
 export const SELECT_MAP = 'SELECT_MAP'
+// 保存成功后更新map
+export const UPDATE_MAP = 'UPDATE_MAP'
 // 选择某个轨迹
 export const SELECT_TRACK = 'SELECT_TRACK'
+
 
 // mqtt 实时消息
 // 接收数据

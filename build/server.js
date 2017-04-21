@@ -4,7 +4,7 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
-const MOCKDATA = require('./mockData')
+const proxy = require('http-proxy-middleware')
 var _ = require('lodash')
 
 const app = express()
@@ -39,26 +39,11 @@ app.get('/', (req, res) => {
 	})
 })
 
-// 准备API
-app.route('/api/v1/maps')
-	.get((req, res, next) => {
-		res.json(MOCKDATA.MAPS)
-	})
-app.route('/api/v1/maps/:id')
-	.get((req, res, next) => {
-		res.json(MOCKDATA.MAPS[0])
-	})
-// 轨迹点
-app.get('/api/v1/tracks', (req, res, next) => {
-	res.json(MOCKDATA.TRACKS)
-})
-// 实时数据点
-app.route('/api/v1/realTime/:id')
-	.get((req, res, next) => {
-		res.json(Array.from({length: 30}, () => {
-			return {x: _.random(50, 1200), y: _.random(50, 1200)}
-		}))
-	})
+// // 设置求请转发
+const apiProxy1 = proxy('/weidian/**', {target: 'http://192.168.1.24:3000', changeOrigin: true})
+app.use('/weidian', apiProxy1)
+const apiProxy2 = proxy('/api/**', {target: 'http://192.168.1.24:3000', changeOrigin: true})
+app.use('/api', apiProxy2)
 
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`)

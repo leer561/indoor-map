@@ -1,5 +1,6 @@
-
 import * as TYPES from '../../vuex/constants'
+import decode from './decode'
+import Conversion from './conversion'
 
 //mutations
 const mutations = {
@@ -12,7 +13,9 @@ const actions = {
 }
 
 const store = {
-	state: {},
+	state: {
+		dart:[]
+	},
 	mutations: mutations,
 	actions: actions,
 	namespaced: true,
@@ -20,21 +23,23 @@ const store = {
 
 const plugin = function (dataExpress) {
 	return (store) => {
+		let conversion = new Conversion()
 		dataExpress.onMessageArrived = (message) => {
-			console.log('store', store)
-			let data = null
-			try {
-				data = JSON.parse(message.payloadString)
-			} catch (e) {
-				console.warn('mqtt json化数据解析失败', message.payloadString)
-				data = message.payloadString
-			}
-
-			store.dispatch('dataExpress/receive', {
-				topic: message.destinationName,
-				data
-			})
+			let tempData = decode(message)
+			if (!tempData) return
+			console.log('tempData', tempData)
+			conversion.input(tempData.message)
+			conversion.start = true
 		}
+
+		// 收到信息后设置开始计数信号
+		let timer = setInterval(() => {
+			if (!conversion.start) return
+			store.dispatch('dataExpress/receive', {
+				topic: 'dart',
+				data: conversion.output()
+			})
+		}, 5000)
 	}
 }
 

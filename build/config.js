@@ -2,7 +2,7 @@ const pkg = require('../package')
 
 module.exports = {
 	port: 4000,
-	title: '室内导航',
+	title: '微店室内定位项目',
 	vendor: Object.keys(pkg.dependencies),
 	postcss: [
 		require('autoprefixer')({
