@@ -6,11 +6,10 @@
                 option(v-for="map in maps" v-bind:value="map") {{map.name}}
         .form-group
             label.form-control-label 起始时间
-            input.form-control( type="datetime-local" v-model="startTime")
-
+            data-picker(v-model="startTime" type="datetime" placeholder="选择日期时间" )
         .form-group
             label.form-control-label 结束时间
-            input.form-control( type="datetime-local" v-model="endTime")
+            data-picker(v-model="endTime" type="datetime" placeholder="选择日期时间" )
 
 
         .form-group

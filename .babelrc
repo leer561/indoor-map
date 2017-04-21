@@ -4,6 +4,12 @@
         "stage-0"
     ],
     "plugins": [
-        "transform-vue-jsx"
+        "transform-vue-jsx",
+        ["component", [
+            {
+                "libraryName": "element-ui",
+                "styleLibraryName": "theme-default"
+            }
+        ]]
     ]
 }

@@ -2,6 +2,8 @@
 	import groupBy from 'lodash/fp/groupBy'
 	import forEach from 'lodash/forEach'
 	import {changeData, changeToPxelsFunc} from '../../../vuex/change-data'
+	import {DatePicker} from 'element-ui'
+    import round from 'lodash/round'
 	export default {
 		data: () => {
 			return {
@@ -27,9 +29,9 @@
 				this.isLoading = true
 				this.$http.get('/api/dart', {
 					params: {
-						gte: new Date(this.startTime).getTime() / 1000,
+						gte: round(this.startTime.getTime() / 1000),
 						//mapId: this.selectedMap.id,
-						lte: new Date(this.endTime).getTime() / 1000,
+						lte: round(this.endTime.getTime() / 1000),
 						filter: 'x,y,tag',
 						by: 'timestamp'
 					}
@@ -61,6 +63,9 @@
 				'selectTrack',
 				'selectMap'
 			])
+		},
+		components: {
+			'data-picker': DatePicker
 		}
 	}
 </script>
